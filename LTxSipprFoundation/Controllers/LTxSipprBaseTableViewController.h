@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LTxSipprGifRefresh.h"
-#import "UIScrollView+EmptyDataSet.h"
+#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import "LTxSipprConfig.h"
 
 

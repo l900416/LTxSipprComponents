@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MJRefreshGifHeader.h"
-#import "MJRefreshAutoGifFooter.h"
+#import <MJRefresh/MJRefreshGifHeader.h>
+#import <MJRefresh/MJRefreshAutoGifFooter.h>
 
 #pragma mark - Header
 @interface LTxSipprRefreshHeader : MJRefreshGifHeader
