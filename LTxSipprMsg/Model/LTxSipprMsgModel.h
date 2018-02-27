@@ -64,14 +64,14 @@
 @property (nonatomic, strong) NSString* msgId;
 
 /**
- * 消息的阅读状态对应的图标
+ * 消息的阅读状态
  **/
-@property (nonatomic, strong) NSString* stateImageName;
+@property (nonatomic, assign) BOOL readState;
 
 /**
  * 消息是否携带附件
  **/
-@property (nonatomic, strong) NSString* attachImageName;
+@property (nonatomic, assign) BOOL hasAttachment;
 
 /**
  * 消息名称
@@ -102,7 +102,7 @@
 /**
  * Instance Method
  **/
-+(instancetype)instanceWithMsgId:(NSString *)msgId stateImageName:(NSString*)stateImageName attachImageName:(NSString*)attachImageName msgName:(NSString*)msgName msgContent:(NSString*)msgContent msgDate:(NSString*)msgDate;
++(instancetype)instanceWithMsgId:(NSString *)msgId readState:(BOOL)readState hasAttachment:(BOOL)hasAttachment msgName:(NSString*)msgName msgContent:(NSString*)msgContent msgDate:(NSString*)msgDate linkUrl:(NSString*)linkUrl msgParams:(NSString*)msgParams rowGuid:(NSString*)rowGuid;
 
 +(instancetype)instanceWithJSONString:(NSString*)jsonString;
 +(instancetype)instanceWithDictionary:(NSDictionary*)dic;

@@ -71,11 +71,18 @@
 /**
  * Instance Method
  **/
-+(instancetype)instanceWithMsgId:(NSString *)msgId stateImageName:(NSString*)stateImageName attachImageName:(NSString*)attachImageName msgName:(NSString*)msgName msgContent:(NSString*)msgContent msgDate:(NSString*)msgDate{
++(instancetype)instanceWithMsgId:(NSString *)msgId readState:(BOOL)readState hasAttachment:(BOOL)hasAttachment msgName:(NSString*)msgName msgContent:(NSString*)msgContent msgDate:(NSString*)msgDate linkUrl:(NSString*)linkUrl msgParams:(NSString*)msgParams rowGuid:(NSString*)rowGuid{
     
     LTxSipprMsgOverviewModel* _instance = [[LTxSipprMsgOverviewModel alloc] init];
-    
-    
+    _instance.msgId = msgId;
+    _instance.readState = readState;
+    _instance.hasAttachment = hasAttachment;
+    _instance.msgName = msgName;
+    _instance.msgContent = msgContent;
+    _instance.msgDate = msgDate;
+    _instance.linkUrl = linkUrl;
+    _instance.msgParams = msgParams;
+    _instance.rowGuid = rowGuid;
     
     return _instance;
 }
@@ -108,16 +115,16 @@
     }else if ([key isEqualToString:@"status"]) {
         NSInteger status = [value integerValue];
         if (status != 0) {//已读
-            self.stateImageName = @"ic_msg_state_read";
+            self.readState = YES;
         }else{//未读
-            self.stateImageName = @"ic_msg_state_unread";
+            self.readState = NO;
         }
     }else if ([key isEqualToString:@"extraFileCount"]) {//携带附件数量
         NSInteger extraFileCount = [value integerValue];
         if (extraFileCount > 0) {
-            self.attachImageName = @"ic_msg_extra_attachment";
+            self.hasAttachment = YES;
         }else{
-            self.attachImageName = nil;
+            self.hasAttachment = NO;
         }
     }else if ([key isEqualToString:@"title"]){
         self.msgName = value;

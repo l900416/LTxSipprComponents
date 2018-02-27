@@ -33,13 +33,18 @@
 -(void)setModel:(LTxSipprMsgOverviewModel *)model{
     _model = model;
     if (model) {
-        self.stateImageView.image = [UIImage imageNamed:model.stateImageName];
+        NSBundle* selfBundle = [NSBundle bundleForClass:self.class];
+        if (model.readState) {
+            self.stateImageView.image = [UIImage imageWithContentsOfFile: [selfBundle pathForResource:@"LTxComponentsForSippr.bundle/Images/ic_msg_state_read" ofType:@"png"]];
+        }else{
+            self.stateImageView.image = [UIImage imageWithContentsOfFile: [selfBundle pathForResource:@"LTxComponentsForSippr.bundle/Images/ic_msg_state_unread" ofType:@"png"]];
+        }
         self.nameL.text = model.msgName;
         self.contentL.text = model.msgContent;
-        self.dateL.text = model.msgDate;
-        if (model.attachImageName) {
+        self.dateL.text = [NSDate lt_timeDescriptionWithDateString:model.msgDate];
+        if (model.hasAttachment) {
             self.attachImageView.hidden = NO;
-            self.attachImageView.image = [UIImage imageNamed:model.attachImageName];
+            self.attachImageView.image = [UIImage imageWithContentsOfFile: [selfBundle pathForResource:@"LTxComponentsForSippr.bundle/Images/ic_msg_extra_attachment" ofType:@"png"]];
         }else{
             self.attachImageView.hidden = YES;
         }

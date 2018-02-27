@@ -10,14 +10,24 @@
 #import <UIKit/UIKit.h>
 
 
-
 typedef void (^LTxSipprCallbackBlock)(void);
 typedef void (^LTxSipprBoolCallbackBlock)(BOOL);
 typedef void (^LTxSipprStringCallbackBlock)(NSString*);
+typedef void (^LTxSipprDictionaryCallbackBlock)(NSDictionary*);
 typedef void (^LTxSipprArrayAndStringCallbackBlock)(NSArray*,NSString*);
 typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*);
 
 
+/**
+ * Notification 通知
+ **/
+
+#define LTX_NOTIFICATION_MSG_DID_SELECT_KEY @"LTx_Notification_Msg_Did_Select_Key"//消息被点击时发送的通知
+
+
+/**
+ * 全局配置相关
+ **/
 @interface LTxSipprConfig : NSObject
 
 /**

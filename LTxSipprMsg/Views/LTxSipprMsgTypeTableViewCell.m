@@ -52,7 +52,7 @@
             self.countL.backgroundColor = [UIColor clearColor];
             self.countL.text = nil;
         }
-        self.dateL.text = model.msgDate;
+        self.dateL.text = [NSDate lt_timeDescriptionWithDateString:model.msgDate];;
         self.contentL.text = model.msgOverview;
     }
 }

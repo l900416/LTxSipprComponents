@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LTxSipprCategories.h"
 @interface LTxSipprBaseTabeViewCell : UITableViewCell
 
 @end

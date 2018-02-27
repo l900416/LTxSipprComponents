@@ -30,7 +30,6 @@ static LTxSipprConfig *_instance;
 - (void)appSetup{
     //NavigationBar 字体颜色
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
-    
     [[UINavigationBar appearance] setBarTintColor:_skinColor];
 }
 
@@ -43,11 +42,11 @@ static LTxSipprConfig *_instance;
     _cellContentViewColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1];
     
     /*HOST*/
-    _messageHost = @"http://hnkczl.hnjs.gov.cn/eepj-push";
+    _messageHost = @"http://125.46.29.147:8852/eepj_push";
     
     /*系统配置*/
-    _appId = @"68fb2fd2-4abb-42f2-8b49-34a2af38b3b0";
-    _userId = @"59f05ffeabfd4a0e606075c0";
+    _appId = @"4f424ed4-b0f1-4af7-9567-aef6cd23d01a";
+    _userId = @"sa00000004/b418d14ae6ad";
     _pageSize = 20;
 }
 @end
