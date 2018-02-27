@@ -13,18 +13,21 @@ Pod::Spec.new do |s|
 
   s.default_subspecs = 'Foundation'
 
-# 消息模块
-  s.subspec 'Message' do |sp|
-    sp.source_files  =  "LTxSipprMsg/**/*.{h,m,xib}", "LTxSipprFoundation/**/*.{h,m}"
-    sp.public_header_files = "LTxSipprMsg/**/**/*.h", "LTxSipprFoundation/**/**/*.h"
-  end
-
 # 核心模块
   s.subspec 'Foundation' do |sp|
     sp.source_files  =  "LTxSipprFoundation/**/*.{h,m}"
     sp.public_header_files = "LTxSipprFoundation/**/**/*.h"
     sp.resources = 'LTxSipprComponents.bundle/Images/*.*'
   end
+
+# 消息模块
+  s.subspec 'Message' do |sp|
+    sp.source_files  =  "LTxSipprMsg/**/*.{h,m,xib}"
+    sp.public_header_files = "LTxSipprMsg/**/**/*.h"
+    sp.dependency 'LTxSippr/Foundation'
+  end
+
+
 
 
 
