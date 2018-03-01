@@ -11,19 +11,21 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/l900416/LTxSipprComponents.git", :tag => "#{s.version}" }
 
   s.dependency 'LTFileQuickPreview'
-  s.dependency 'MJRefresh'
-  s.dependency 'DZNEmptyDataSet'
-  s.dependency 'AFNetworking'
+  s.dependency 'MJRefresh', '~> 3.1.15.1'
+  s.dependency 'DZNEmptyDataSet', '~> 1.8.1'
+  s.dependency 'AFNetworking', '~> 3.1.0'
+  s.dependency 'Toast', '~> 4.0.0'
   s.frameworks = "Foundation", "UIKit"
 
   s.default_subspecs = 'Core'
 
-# 资源模块
+  # 资源模块
   s.subspec 'Support' do |sp|
     sp.resources = 'LTxSipprComponents.bundle'
   end
 
-# 核心模块
+
+  # 核心模块
   s.subspec 'Core' do |sp|
     # 依赖
     sp.dependency 'LTxSippr/Support'
@@ -51,7 +53,7 @@ Pod::Spec.new do |s|
   end
 
 
-# 消息模块
+  # 消息模块
   s.subspec 'Message' do |sp|
     sp.dependency 'LTxSippr/Core'
 
@@ -84,6 +86,38 @@ Pod::Spec.new do |s|
 
   end
 
+  # 设置模块
+  s.subspec 'Setting' do |sp|
+    sp.dependency 'LTxSippr/Core'
+
+    # Model
+        sp.subspec 'Model' do |ssp|
+        ssp.source_files  =  "LTxSipprSetting/Model/*.{h,m}"
+        ssp.public_header_files = "LTxSipprSetting/Model/*.h"
+    end
+
+    # ViewModel
+    sp.subspec 'ViewModel' do |ssp|
+        ssp.source_files  =  "LTxSipprSetting/ViewModel/*.{h,m}"
+        ssp.public_header_files = "LTxSipprSetting/ViewModel/*.h"
+    end
+
+    # Views
+    sp.subspec 'Views' do |ssp|
+        ssp.source_files  =  "LTxSipprSetting/Views/*.{h,m,xib}"
+        ssp.public_header_files = "LTxSipprSetting/Views/*.h"
+        ssp.dependency 'LTxSippr/Setting/Model'
+    end
+
+    # Controllers
+    sp.subspec 'Controllers' do |ssp|
+        ssp.source_files  =  "LTxSipprSetting/Controllers/*.{h,m}"
+        ssp.public_header_files = "LTxSipprSetting/Controllers/*.h"
+        ssp.dependency 'LTxSippr/Setting/Views'
+        ssp.dependency 'LTxSippr/Setting/ViewModel'
+    end
+
+end
 
 
 end

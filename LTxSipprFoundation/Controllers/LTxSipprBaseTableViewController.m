@@ -57,9 +57,9 @@
     //约束-X
     NSLayoutConstraint* centerXConstraint = [NSLayoutConstraint constraintWithItem:_activityView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0];
     //约束-Y
-    NSLayoutConstraint* centerYConstraint = [NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_activityView attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0];
+    NSLayoutConstraint* centerYConstraint = [NSLayoutConstraint constraintWithItem:_activityView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.f constant:-100];
     //宽度
-    NSLayoutConstraint* widthConstraint = [NSLayoutConstraint constraintWithItem:_activityView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:100.f];
+    NSLayoutConstraint* widthConstraint = [NSLayoutConstraint constraintWithItem:_activityView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:80.f];
     //高度
     NSLayoutConstraint* heightConstraint = [NSLayoutConstraint constraintWithItem:_activityView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_activityView attribute:NSLayoutAttributeWidth multiplier:1.f constant:0.f];
     

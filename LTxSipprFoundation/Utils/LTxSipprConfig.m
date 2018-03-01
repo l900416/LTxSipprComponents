@@ -43,6 +43,7 @@ static LTxSipprConfig *_instance;
     
     /*HOST*/
     _messageHost = @"http://125.46.29.147:8852/eepj_push";
+    _baseHost = @"http://125.46.29.147:8851";
     
     /*系统配置*/
     _appId = @"4f424ed4-b0f1-4af7-9567-aef6cd23d01a";

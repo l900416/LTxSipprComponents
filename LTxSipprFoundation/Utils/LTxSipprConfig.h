@@ -14,8 +14,13 @@ typedef void (^LTxSipprCallbackBlock)(void);
 typedef void (^LTxSipprBoolCallbackBlock)(BOOL);
 typedef void (^LTxSipprStringCallbackBlock)(NSString*);
 typedef void (^LTxSipprDictionaryCallbackBlock)(NSDictionary*);
+typedef void (^LTxSipprProgressCallbackBlock)(NSProgress*);
+
 typedef void (^LTxSipprArrayAndStringCallbackBlock)(NSArray*,NSString*);
 typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*);
+
+typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
+
 
 
 /**
@@ -25,8 +30,14 @@ typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*
 #define LTX_NOTIFICATION_MSG_DID_SELECT_KEY @"LTx_Notification_Msg_Did_Select_Key"//消息被点击时发送的通知
 
 
+
 /**
- * 全局配置相关
+ * 宏定义
+ **/
+#define IS_DEBUG   YES
+
+/**
+ * 配置相关
  **/
 @interface LTxSipprConfig : NSObject
 
@@ -48,6 +59,7 @@ typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*
 
 #pragma mark - host
 @property (nonatomic, strong) NSString* messageHost;
+@property (nonatomic, strong) NSString* baseHost;
 
 #pragma mark - 系统配置
 @property (nonatomic, strong) NSString* appId;

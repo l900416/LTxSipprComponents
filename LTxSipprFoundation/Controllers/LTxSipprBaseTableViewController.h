@@ -10,7 +10,8 @@
 #import "LTxSipprGifRefresh.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import "LTxSipprConfig.h"
-
+#import "LTxSipprCategories.h"
+#import "LTxSipprPopup.h"
 
 @interface LTxSipprBaseTableViewController : UITableViewController
 
