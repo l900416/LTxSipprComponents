@@ -51,6 +51,8 @@
 -(void)setupActivityView{
     _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     _activityView.translatesAutoresizingMaskIntoConstraints = NO;
+    _activityView.layer.cornerRadius = 8.f;
+    _activityView.clipsToBounds = YES;
     [self.view addSubview:_activityView];
     
     //添加约束
@@ -141,9 +143,9 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.textColor = [UIColor lightGrayColor];
     // 设置文字
-    [header setTitle:@"下拉刷新..." forState:MJRefreshStateIdle];
-    [header setTitle:@"松手更新..." forState:MJRefreshStatePulling];
-    [header setTitle:@"更新中..." forState:MJRefreshStateRefreshing];
+    [header setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_down_idle") forState:MJRefreshStateIdle];
+    [header setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_down_pulling") forState:MJRefreshStatePulling];
+    [header setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_down_refreshing") forState:MJRefreshStateRefreshing];
     return header;
 }
 -(LTxSipprRefreshFooter*)footerWithRefreshingBlock:(LTxSipprCallbackBlock)pullUpRefresh{
@@ -156,9 +158,9 @@
     footer.automaticallyChangeAlpha = YES;
     footer.stateLabel.textColor = [UIColor lightGrayColor];
     // 设置文字
-    [footer setTitle:@"上拉加载更多..." forState:MJRefreshStateIdle];
-    [footer setTitle:@"松手更新..." forState:MJRefreshStatePulling];
-    [footer setTitle:@"更新中..." forState:MJRefreshStateRefreshing];
+    [footer setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_up_idle") forState:MJRefreshStateIdle];
+    [footer setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_up_pulling") forState:MJRefreshStatePulling];
+    [footer setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_up_refreshing") forState:MJRefreshStateRefreshing];
     return footer;
 }
 

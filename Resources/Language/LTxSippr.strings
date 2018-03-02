@@ -1,0 +1,37 @@
+/* 
+  LTxSippr.strings
+  LTxComponentsForSippr
+
+  Created by liangtong on 2018/3/1.
+  Copyright © 2018年 liangtong. All rights reserved.
+*/
+
+/** 共通 **/
+
+"text_cmn_submit"    =   "提交";
+"text_cmn_refresh_pull_down_idle"    =   "下拉刷新...";
+"text_cmn_refresh_pull_down_pulling"    =   "松手更新...";
+"text_cmn_refresh_pull_down_refreshing"    =   "更新中...";
+"text_cmn_refresh_pull_up_idle"    =   "上拉加载更多...";
+"text_cmn_refresh_pull_up_pulling"    =   "松手更新...";
+"text_cmn_refresh_pull_up_refreshing"    =   "更新中...";
+"text_cmn_refresh_pull_up_no_more"    =   "————没有更多的了————";
+
+/** 消息 **/
+"text_message_mine"    =   "我的消息";
+"text_message_push_diy"    =   "推送定制";
+"text_message_push_no_item"    =   "尚未配置推送定制项";
+
+/** 设置 **/
+"text_setting_about"    =   "关于";
+"text_setting_about_current_version"    =   "当前版本";
+"text_setting_about_history"    =   "更新历史";
+"text_setting_feed_back"    =   "用户反馈";
+"text_setting_feed_back_success"    =   "反馈成功！";
+"text_setting_feed_back_content_empty"    =   "内容不能为空！";
+"text_setting_qrcode_install"    =   "扫我安装";
+
+
+/** 相机 **/
+"text_camera_qrcode_scan"    =   "扫一扫";
+"text_camera_album"    =   "相册";

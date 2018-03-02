@@ -37,6 +37,11 @@ typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 #define IS_DEBUG   YES
 
 /**
+ * 语言配置
+ **/
+#define LTxSipprLocalizedStringWithKey(key)  NSLocalizedStringFromTable(key, @"LTxSippr", nil)
+
+/**
  * 配置相关
  **/
 @interface LTxSipprConfig : NSObject
@@ -53,6 +58,7 @@ typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 
 #pragma mark - 颜色
 @property (nonatomic, strong) UIColor* skinColor;
+@property (nonatomic, strong) UIColor* hintColor;
 @property (nonatomic, strong) UIColor* activityViewBackgroundColor;
 @property (nonatomic, strong) UIColor* viewBackgroundColor;
 @property (nonatomic, strong) UIColor* cellContentViewColor;
@@ -65,4 +71,8 @@ typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 @property (nonatomic, strong) NSString* appId;
 @property (nonatomic, strong) NSString* userId;
 @property (nonatomic, assign) NSInteger pageSize;
+
+#pragma mark - 其他
+@property (nonatomic, strong) NSString* instalUrl;
+@property (nonatomic, strong) NSString* instalTip;
 @end

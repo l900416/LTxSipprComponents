@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"用户反馈";
+    self.title = LTxSipprLocalizedStringWithKey(@"text_setting_feed_back");
     [self setupComponents];
     [self addConstraintsOnComponents];
     
@@ -39,7 +39,7 @@
     _submitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _submitBtn.translatesAutoresizingMaskIntoConstraints = NO;
     [_submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_submitBtn setTitle:@"      提交      " forState:UIControlStateNormal];
+    [_submitBtn setTitle:[NSString stringWithFormat:@"      %@      ",LTxSipprLocalizedStringWithKey(@"text_cmn_submit")] forState:UIControlStateNormal];
     [_submitBtn setBackgroundColor:[LTxSipprConfig sharedInstance].skinColor];
     _submitBtn.layer.cornerRadius = 5.f;
     _submitBtn.clipsToBounds = YES;
@@ -65,7 +65,7 @@
     [_opinionView resignFirstResponder];
     NSString* content = [_opinionView.text lt_trimmingWhitespace];
     if ([content isEqualToString:@""]) {
-        [LTxSipprPopup showToast:@"请输入你的意见或建议！" onView:self.view];
+        [LTxSipprPopup showToast:LTxSipprLocalizedStringWithKey(@"text_setting_feed_back_content_empty") onView:self.view];
         return;
     }
     _submitBtn.enabled = NO;
@@ -77,7 +77,7 @@
         if (!errorTips) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [strongSelf.navigationController popViewControllerAnimated:true];
-                 [LTxSipprPopup showToast:@"反馈成功！" onView:strongSelf.navigationController.view];
+                 [LTxSipprPopup showToast:LTxSipprLocalizedStringWithKey(@"text_setting_feed_back_success") onView:strongSelf.navigationController.view];
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{

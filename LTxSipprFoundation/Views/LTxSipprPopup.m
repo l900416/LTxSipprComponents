@@ -20,16 +20,15 @@
     style.messageFont = [UIFont systemFontOfSize:16.0];
     style.messageColor = [UIColor whiteColor];
     style.messageAlignment = NSTextAlignmentCenter;
-    style.backgroundColor = [LTxSipprConfig sharedInstance].skinColor;
+    style.backgroundColor = [LTxSipprConfig sharedInstance].hintColor;
     
     [CSToastManager setSharedStyle:style];
     [CSToastManager setQueueEnabled:NO];
     
     // - position: [NSValue valueWithCGPoint:CGPointMake(110, 110)]
     [view hideAllToasts];
-    [view makeToast:msg
-           duration:3.0
-           position:CSToastPositionBottom
-              style:style];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [view makeToast:msg duration:3.0 position:CSToastPositionBottom style:style];
+    });
 }
 @end

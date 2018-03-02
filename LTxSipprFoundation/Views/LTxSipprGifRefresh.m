@@ -7,6 +7,7 @@
 //
 
 #import "LTxSipprGifRefresh.h"
+#import "LTxSipprConfig.h"
 
 #pragma mark - Header
 @implementation LTxSipprRefreshHeader
@@ -60,7 +61,7 @@
            duration:1.f
            forState:MJRefreshStateRefreshing];
     
-    [self setTitle:@"————这是底线————" forState:MJRefreshStateNoMoreData];
+    [self setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_up_no_more") forState:MJRefreshStateNoMoreData];
 }
 
 @end

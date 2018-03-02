@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/l900416/LTxSipprComponents.git", :tag => "#{s.version}" }
 
   s.dependency 'LTFileQuickPreview'
-  s.dependency 'MJRefresh', '~> 3.1.15.1'
+  s.dependency 'MJRefresh', '~> 3.1.15.3'
   s.dependency 'DZNEmptyDataSet', '~> 1.8.1'
-  s.dependency 'AFNetworking', '~> 3.1.0'
+  s.dependency 'AFNetworking', '~> 3.2.0'
   s.dependency 'Toast', '~> 4.0.0'
   s.frameworks = "Foundation", "UIKit"
 
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   # 资源模块
   s.subspec 'Support' do |sp|
-    sp.resources = 'LTxSipprComponents.bundle'
+    sp.resources = 'Resources/LTxSipprComponents.bundle', 'Resources/Language'
   end
 
 
@@ -115,9 +115,21 @@ Pod::Spec.new do |s|
         ssp.public_header_files = "LTxSipprSetting/Controllers/*.h"
         ssp.dependency 'LTxSippr/Setting/Views'
         ssp.dependency 'LTxSippr/Setting/ViewModel'
+        ssp.dependency 'LTxSippr/Camera/QRCode'
     end
 
-end
+  end
 
+  # Camera模块
+  s.subspec 'Camera' do |sp|
+    sp.dependency 'LTxSippr/Core'
+
+    # QRCode
+    sp.subspec 'QRCode' do |ssp|
+        ssp.source_files  =  "LTxSipprCamera/QRCode/*.{h,m}"
+        ssp.public_header_files = "LTxSipprCamera/QRCode/*.h"
+    end
+
+  end
 
 end

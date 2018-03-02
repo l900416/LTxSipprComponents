@@ -23,7 +23,7 @@ static NSString* LTxSipprMsgTypeTableViewCellIdentifier = @"LTxSipprMsgTypeTable
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title =  @"我的消息";
+    self.title = LTxSipprLocalizedStringWithKey(@"text_message_mine");
     
     [self setupDefaultConfig];
     
