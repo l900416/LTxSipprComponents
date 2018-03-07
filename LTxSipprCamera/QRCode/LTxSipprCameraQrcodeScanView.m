@@ -9,18 +9,81 @@
 #import "LTxSipprCameraQrcodeScanView.h"
 #import "LTxSipprCameraUtil.h"
 #import <AVFoundation/AVFoundation.h>
+#import "LTxSipprConfig.h"
 
 #define LTXSIPPR_CAMERA_QRCODE_ANIMATE_VIEW_HEIGHT 10
 
+
+@interface LTxSipprCameraScanView:UIView
+@end
+@implementation LTxSipprCameraScanView
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    CGFloat borderX = 0;
+    CGFloat borderY = 0;
+    CGFloat borderLineW = 3.f;
+    CGFloat lineWidth = 6.f;
+    CGFloat cornerLenght = 25;
+    
+    CGFloat borderW = self.frame.size.width;
+    CGFloat borderH = borderW;
+    UIColor* borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+    UIColor* cornerColor = [LTxSipprConfig sharedInstance].skinColor;
+    
+    /// 边框设置
+    UIBezierPath *borderPath = [UIBezierPath bezierPathWithRect:CGRectMake(borderX, borderY, borderW, borderH)];
+    borderPath.lineCapStyle = kCGLineCapButt;
+    borderPath.lineWidth = borderLineW;
+    [borderColor set];
+    [borderPath stroke];
+    
+    /// 左上角小图标
+    UIBezierPath *leftTopPath = [UIBezierPath bezierPath];
+    leftTopPath.lineWidth = lineWidth;
+    [cornerColor set];
+    [leftTopPath moveToPoint:CGPointMake(borderX, borderY + cornerLenght)];
+    [leftTopPath addLineToPoint:CGPointMake(borderX, borderY)];
+    [leftTopPath addLineToPoint:CGPointMake(borderX + cornerLenght, borderY)];
+    [leftTopPath stroke];
+    
+    /// 左下角小图标
+    UIBezierPath *leftBottomPath = [UIBezierPath bezierPath];
+    leftBottomPath.lineWidth = lineWidth;
+    [cornerColor set];
+    [leftBottomPath moveToPoint:CGPointMake(borderX + cornerLenght, borderY + borderH)];
+    [leftBottomPath addLineToPoint:CGPointMake(borderX, borderY + borderH)];
+    [leftBottomPath addLineToPoint:CGPointMake(borderX, borderY + borderH - cornerLenght)];
+    [leftBottomPath stroke];
+    
+    /// 右上角小图标
+    UIBezierPath *rightTopPath = [UIBezierPath bezierPath];
+    rightTopPath.lineWidth = lineWidth;
+    [cornerColor set];
+    [rightTopPath moveToPoint:CGPointMake(borderX + borderW - cornerLenght, borderY)];
+    [rightTopPath addLineToPoint:CGPointMake(borderX + borderW, borderY)];
+    [rightTopPath addLineToPoint:CGPointMake(borderX + borderW, borderY + cornerLenght)];
+    [rightTopPath stroke];
+    
+    /// 右下角小图标
+    UIBezierPath *rightBottomPath = [UIBezierPath bezierPath];
+    rightBottomPath.lineWidth = lineWidth;
+    [cornerColor set];
+    [rightBottomPath moveToPoint:CGPointMake(borderX + borderW, borderY + borderH - cornerLenght)];
+    [rightBottomPath addLineToPoint:CGPointMake(borderX + borderW, borderY + borderH)];
+    [rightBottomPath addLineToPoint:CGPointMake(borderX + borderW - cornerLenght, borderY + borderH)];
+    [rightBottomPath stroke];
+}
+@end
+
+
+
 @interface LTxSipprCameraQrcodeScanView()
-
-@property (nonatomic, strong) UIView* scanContentView;
-
+@property (nonatomic, strong) LTxSipprCameraScanView* scanContentView;
 @property (nonatomic, strong) UIView* topView;
 @property (nonatomic, strong) UIView* rightView;
 @property (nonatomic, strong) UIView* bottomView;
 @property (nonatomic, strong) UIView* leftView;
-
 @property (nonatomic, strong) UIButton* openFlashLightBtn;
 @property (nonatomic, strong) UILabel* tipL;
 @property (nonatomic, assign) BOOL openState;//用户打开灯光
@@ -88,14 +151,14 @@
     
     if (isNight) {
         if (_openState) {
-            [_openFlashLightBtn setTitle:@" 轻点关闭 " forState:UIControlStateNormal];
+            [_openFlashLightBtn setTitle:LTxSipprLocalizedStringWithKey(@"text_camera_close_flash_light") forState:UIControlStateNormal];
         }else{
-            [_openFlashLightBtn setTitle:@" 轻点照亮 " forState:UIControlStateNormal];
+            [_openFlashLightBtn setTitle:LTxSipprLocalizedStringWithKey(@"text_camera_open_flash_light") forState:UIControlStateNormal];
         }
         _openFlashLightBtn.hidden = NO;
     }else{
         if (_openState) {
-            [_openFlashLightBtn setTitle:@" 轻点关闭 " forState:UIControlStateNormal];
+            [_openFlashLightBtn setTitle:LTxSipprLocalizedStringWithKey(@"text_camera_close_flash_light") forState:UIControlStateNormal];
             _openFlashLightBtn.hidden = NO;
         }else{
             _openFlashLightBtn.hidden = YES;
@@ -185,10 +248,8 @@
 #pragma mark - Getter 方法
 -(UIView*)scanContentView{
     if (!_scanContentView) {
-        _scanContentView = [[UIView alloc] init];
+        _scanContentView = [[LTxSipprCameraScanView alloc] init];
         _scanContentView.translatesAutoresizingMaskIntoConstraints = NO;
-        _scanContentView.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6].CGColor;
-        _scanContentView.layer.borderWidth = 0.7;
         _scanContentView.backgroundColor = [UIColor clearColor];
         [self addSubview:_scanContentView];
     }
@@ -262,7 +323,7 @@
         _tipL.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
         _tipL.font = [UIFont systemFontOfSize:16];
         _tipL.textAlignment = NSTextAlignmentCenter;
-        _tipL.text = @"放入框内，自动扫描";
+        _tipL.text = LTxSipprLocalizedStringWithKey(@"text_camera_qrcode_scan_tip");
         [self addSubview:_tipL];
     }
     return _tipL;

@@ -124,10 +124,24 @@ Pod::Spec.new do |s|
   s.subspec 'Camera' do |sp|
     sp.dependency 'LTxSippr/Core'
 
+    # Common
+    sp.subspec 'Common' do |ssp|
+        ssp.source_files  =  "LTxSipprCamera/Common/*.{h,m}"
+        ssp.public_header_files = "LTxSipprCamera/Common/*.h"
+    end
+
     # QRCode
     sp.subspec 'QRCode' do |ssp|
         ssp.source_files  =  "LTxSipprCamera/QRCode/*.{h,m}"
         ssp.public_header_files = "LTxSipprCamera/QRCode/*.h"
+        ssp.dependency 'LTxSippr/Camera/Common'
+    end
+
+    # Photo
+    sp.subspec 'Photo' do |ssp|
+        ssp.source_files  =  "LTxSipprCamera/Photo/*.{h,m}"
+        ssp.public_header_files = "LTxSipprCamera/Photo/*.h"
+        ssp.dependency 'LTxSippr/Camera/Common'
     end
 
   end

@@ -66,11 +66,12 @@
 #endif
                 [self.scanView addTimer];
             }else{
-                [LTxSipprPopup  showToast:@"没有授权使用相机,无法进行二维码扫描。" onView:self.view];
+                [LTxSipprPopup  showToast:LTxSipprLocalizedStringWithKey(@"text_camera_authorization_do_deny") onView:self.navigationController.view];
+                [self.navigationController popViewControllerAnimated:true];
             }
         }];
     }else{
-        [LTxSipprPopup  showToast:@"没有使用相机权限，请在设备的'设置-隐私-相机'中允许访问相机。" onView:self.view];
+        [LTxSipprPopup  showToast:LTxSipprLocalizedStringWithKey(@"text_camera_authorization_status_deny") onView:self.view];
     }
 }
 
@@ -79,13 +80,13 @@
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];// 2、创建输入流
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];// 3、创建输出流
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];// 4、设置代理 在主线程里刷新
-    output.rectOfInterest = CGRectMake(0.3, 0.3, 0.4, 0.4);// 设置扫描范围
+//    output.rectOfInterest = CGRectMake(0.2, 0.2, 0.6, 0.6);// 设置扫描范围
     //光感传感器
     AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
     [videoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
     
     self.session = [[AVCaptureSession alloc] init];// 5、初始化链接对象（会话对象）
-    [_session setSessionPreset:AVCaptureSessionPresetHigh];// 高质量采集率
+    [_session setSessionPreset:AVCaptureSessionPreset1920x1080];// 高质量采集率
     [_session addInput:input];// 5.1 添加会话输入
     [_session addOutput:output];// 5.2 添加会话输出
     [_session addOutput:videoDataOutput];//光感传感器
@@ -162,7 +163,7 @@
         break;
     }
     if (!find) {
-        [LTxSipprPopup showToast:@"二维码识别失败！" onView:self.view];
+        [LTxSipprPopup showToast:LTxSipprLocalizedStringWithKey(@"text_camera_qrcode_scan_failed") onView:self.view];
     }
 }
 
@@ -193,7 +194,7 @@
     
     UIButton* albumBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 42, 26)];
     [albumBtn addTarget:self action:@selector(albumBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [albumBtn setTitle:@"相册" forState:UIControlStateNormal];
+    [albumBtn setTitle:LTxSipprLocalizedStringWithKey(@"text_camera_album") forState:UIControlStateNormal];
     [albumBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:17.f]];
     [albumBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:albumBtn];

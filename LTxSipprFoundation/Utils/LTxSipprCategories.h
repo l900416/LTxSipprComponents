@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define LT_DATE_MINUTE    60
 #define LT_DATE_HOUR    3600
@@ -141,4 +142,14 @@
                  containLetter:(BOOL)containLetter
          containOtherCharacter:(NSString *)containOtherCharacter
            firstCannotBeDigtal:(BOOL)firstCannotBeDigtal;
+
+
 @end
+
+#pragma mark - NSBundle
+@interface NSBundle (LTxSipprExtension)
+
++ (UIImage *)lt_bundleImageWithImageName:(NSString*)imageName;
+
+@end
+

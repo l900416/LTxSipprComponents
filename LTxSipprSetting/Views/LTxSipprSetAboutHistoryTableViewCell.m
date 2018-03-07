@@ -30,7 +30,13 @@
     _model = model;
     if (model) {
         self.versionL.text = model.displayVersion;
-        self.contentL.text = model.updateContent;
+        
+        //修改行间距
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:model.updateContent];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:4];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [model.updateContent length])];
+        self.contentL.attributedText = attributedString;
     }
 }
 

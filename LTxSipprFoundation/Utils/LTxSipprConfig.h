@@ -8,18 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "LTxSipprMacroDef.h"
 
 
-typedef void (^LTxSipprCallbackBlock)(void);
-typedef void (^LTxSipprBoolCallbackBlock)(BOOL);
-typedef void (^LTxSipprStringCallbackBlock)(NSString*);
-typedef void (^LTxSipprDictionaryCallbackBlock)(NSDictionary*);
-typedef void (^LTxSipprProgressCallbackBlock)(NSProgress*);
 
-typedef void (^LTxSipprArrayAndStringCallbackBlock)(NSArray*,NSString*);
-typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*);
-
-typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 
 
 
@@ -31,15 +23,7 @@ typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 
 
 
-/**
- * 宏定义
- **/
-#define IS_DEBUG   YES
 
-/**
- * 语言配置
- **/
-#define LTxSipprLocalizedStringWithKey(key)  NSLocalizedStringFromTable(key, @"LTxSippr", nil)
 
 /**
  * 配置相关

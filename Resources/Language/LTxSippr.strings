@@ -35,3 +35,11 @@
 /** 相机 **/
 "text_camera_qrcode_scan"    =   "扫一扫";
 "text_camera_album"    =   "相册";
+"text_camera_open_flash_light"    =   " 轻点照亮 ";
+"text_camera_close_flash_light"    =   " 轻点关闭 ";
+"text_camera_qrcode_scan_tip"    =   "放入框内，自动扫描";
+"text_camera_authorization_do_deny"    =   "没有授权使用相机,无法进行二维码扫描。";
+"text_camera_authorization_status_deny"    =   "没有使用相机权限，请在设备的'设置-隐私-相机'中允许访问相机。";
+"text_camera_qrcode_scan_failed"    =   "二维码识别失败！";
+"text_camera_album_photo_save_failed"    =   "照片未保存至系统相册！";
+"text_camera_album_video_save_failed"    =   "视频未保存至系统相册！";
