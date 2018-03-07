@@ -34,16 +34,16 @@
     _model = model;
     if (model) {
         if (model.readState) {
-            self.stateImageView.image = [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_state_read" ofType:@"png"]];
+            self.stateImageView.image = LTxSipprBundlePngImageWithName(@"ic_msg_state_read");
         }else{
-            self.stateImageView.image = [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_state_unread" ofType:@"png"]];
+            self.stateImageView.image = LTxSipprBundlePngImageWithName(@"ic_msg_state_unread");
         }
         self.nameL.text = model.msgName;
         self.contentL.text = model.msgContent;
         self.dateL.text = [NSDate lt_timeDescriptionWithDateString:model.msgDate];
         if (model.hasAttachment) {
             self.attachImageView.hidden = NO;
-            self.attachImageView.image = [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_extra_attachment" ofType:@"png"]];
+            self.attachImageView.image = LTxSipprBundlePngImageWithName(@"ic_msg_extra_attachment");
         }else{
             self.attachImageView.hidden = YES;
         }

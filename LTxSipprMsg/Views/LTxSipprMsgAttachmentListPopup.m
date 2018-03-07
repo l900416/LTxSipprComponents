@@ -29,7 +29,7 @@
     self.clipsToBounds = YES;
     
     
-    [self.closeBtn setImage:[UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_extra_attachment_close" ofType:@"png"]] forState:UIControlStateNormal];
+    [self.closeBtn setImage:LTxSipprBundlePngImageWithName(@"ic_msg_extra_attachment_close") forState:UIControlStateNormal];
     [self.closeBtn addTarget:self action:@selector(closeBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.dataSource = self;

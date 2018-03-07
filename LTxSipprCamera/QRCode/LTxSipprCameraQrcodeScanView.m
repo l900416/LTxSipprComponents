@@ -296,7 +296,7 @@
     if (!_animationImageView) {
         _animationImageView = [[UIImageView alloc] init];
         _animationImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        UIImage* image = [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_camera_qrcode_scan_animate_line" ofType:@"png"]];
+        UIImage* image = LTxSipprBundlePngImageWithName(@"ic_camera_qrcode_scan_animate_line");
         _animationImageView.image = image;
         [self addSubview:_animationImageView];
     }

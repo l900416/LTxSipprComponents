@@ -26,6 +26,8 @@ typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 
 #define LTxSipprBundleImagePath(fileName) [@"Frameworks/LTxSippr.framework/LTxSipprComponents.bundle/Images" stringByAppendingPathComponent:fileName]
 
+#define LTxSipprBundlePngImageWithName(imageName) [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:[NSString stringWithFormat:@"LTxSipprComponents.bundle/Images/%@",imageName] ofType:@"png"]]
+
 
 /**
  * 宏定义
