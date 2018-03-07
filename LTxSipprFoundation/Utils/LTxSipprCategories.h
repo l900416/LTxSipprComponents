@@ -146,10 +146,4 @@
 
 @end
 
-#pragma mark - NSBundle
-@interface NSBundle (LTxSipprExtension)
-
-+ (UIImage *)lt_bundleImageWithImageName:(NSString*)imageName;
-
-@end
 

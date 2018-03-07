@@ -38,7 +38,7 @@
 -(void)setupLeftBackButton{
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 26, 26)];
     [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setImage:[UIImage imageWithContentsOfFile: [[NSBundle bundleForClass:self.class] pathForResource:@"LTxSipprComponents.bundle/Images/ic_navi_back" ofType:@"png"]] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_navi_back" ofType:@"png"]] forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 }
 -(void)backAction{

@@ -33,18 +33,17 @@
 -(void)setModel:(LTxSipprMsgOverviewModel *)model{
     _model = model;
     if (model) {
-        NSBundle* selfBundle = [NSBundle bundleForClass:self.class];
         if (model.readState) {
-            self.stateImageView.image = [UIImage imageWithContentsOfFile: [selfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_state_read" ofType:@"png"]];
+            self.stateImageView.image = [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_state_read" ofType:@"png"]];
         }else{
-            self.stateImageView.image = [UIImage imageWithContentsOfFile: [selfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_state_unread" ofType:@"png"]];
+            self.stateImageView.image = [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_state_unread" ofType:@"png"]];
         }
         self.nameL.text = model.msgName;
         self.contentL.text = model.msgContent;
         self.dateL.text = [NSDate lt_timeDescriptionWithDateString:model.msgDate];
         if (model.hasAttachment) {
             self.attachImageView.hidden = NO;
-            self.attachImageView.image = [UIImage imageWithContentsOfFile: [selfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_extra_attachment" ofType:@"png"]];
+            self.attachImageView.image = [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_extra_attachment" ofType:@"png"]];
         }else{
             self.attachImageView.hidden = YES;
         }

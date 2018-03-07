@@ -381,16 +381,3 @@
 
 @end
 
-
-#pragma mark - NSBundle
-@implementation NSBundle (LTxSipprExtension)
-static NSBundle *sLTxSipprBundle = nil;
-+ (UIImage *)lt_bundleImageWithImageName:(NSString*)imageName{
-    if (sLTxSipprBundle == nil) {
-        sLTxSipprBundle = [NSBundle bundleForClass:self.class];
-    }
-    return [UIImage imageWithContentsOfFile: [sLTxSipprBundle pathForResource:[NSString stringWithFormat:@"LTxSipprComponents.bundle/Images/%@",imageName] ofType:@"png"]];
-}
-
-@end
-

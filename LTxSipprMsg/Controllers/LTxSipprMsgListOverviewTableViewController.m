@@ -36,7 +36,7 @@ static NSString* LTxSipprMsgTypeDetailTableViewCellIdentifier = @"LTxSipprMsgTyp
 -(void)setupDefaultConfig{
     self.tableView.estimatedRowHeight = 60.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    [self.tableView registerNib:[UINib nibWithNibName:@"LTxSipprMsgTypeDetailTableViewCell" bundle:nil] forCellReuseIdentifier:LTxSipprMsgTypeDetailTableViewCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"LTxSipprMsgTypeDetailTableViewCell" bundle:SelfBundle] forCellReuseIdentifier:LTxSipprMsgTypeDetailTableViewCellIdentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     __weak __typeof(self) weakSelf = self;

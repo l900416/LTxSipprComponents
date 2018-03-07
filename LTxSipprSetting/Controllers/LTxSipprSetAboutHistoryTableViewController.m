@@ -35,7 +35,7 @@ static NSString* LTxSipprSetAboutHistoryTableViewCellIdentifier = @"LTxSipprSetA
     
     self.tableView.estimatedRowHeight = 60.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    [self.tableView registerNib:[UINib nibWithNibName:@"LTxSipprSetAboutHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:LTxSipprSetAboutHistoryTableViewCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"LTxSipprSetAboutHistoryTableViewCell" bundle:SelfBundle] forCellReuseIdentifier:LTxSipprSetAboutHistoryTableViewCellIdentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     __weak __typeof(self) weakSelf = self;

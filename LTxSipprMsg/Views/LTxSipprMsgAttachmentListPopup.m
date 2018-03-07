@@ -28,9 +28,8 @@
     self.layer.cornerRadius = 8.f;
     self.clipsToBounds = YES;
     
-    NSBundle* selfBundle = [NSBundle bundleForClass:self.class];
     
-    [self.closeBtn setImage:[UIImage imageWithContentsOfFile: [selfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_extra_attachment_close" ofType:@"png"]] forState:UIControlStateNormal];
+    [self.closeBtn setImage:[UIImage imageWithContentsOfFile: [SelfBundle pathForResource:@"LTxSipprComponents.bundle/Images/ic_msg_extra_attachment_close" ofType:@"png"]] forState:UIControlStateNormal];
     [self.closeBtn addTarget:self action:@selector(closeBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.dataSource = self;

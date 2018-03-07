@@ -22,7 +22,10 @@ typedef void (^LTxSipprImageAndURLCallbackBlock)(UIImage*,NSURL*);
 typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 
 
+#define SelfBundle  [NSBundle bundleForClass:[self class]]
+
 #define LTxSipprBundleImagePath(fileName) [@"Frameworks/LTxSippr.framework/LTxSipprComponents.bundle/Images" stringByAppendingPathComponent:fileName]
+
 
 /**
  * 宏定义
@@ -33,7 +36,10 @@ typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 /**
  * 语言配置
  **/
-#define LTxSipprLocalizedStringWithKey(key)  NSLocalizedStringFromTable(key, @"LTxSippr", nil)
+#define LTxSipprLocalizedStringWithKey(key)  NSLocalizedStringFromTableInBundle(key,@"Frameworks/LTxSippr.framework/LTxSipprComponents.bundle/Language/LTxSippr",[NSBundle mainBundle],nil)
+
+
+
 
 
 

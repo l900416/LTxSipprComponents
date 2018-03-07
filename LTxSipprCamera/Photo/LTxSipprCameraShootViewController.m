@@ -100,9 +100,9 @@
     [self.session startRunning];
     [self setFocusCursorWithPoint:self.view.center];
     self.takedImageView.hidden = YES;
+    [self deleteVideo];
     self.takedImage = nil;
     self.videoUrl = nil;
-    [self deleteVideo];
 }
 
 /**
