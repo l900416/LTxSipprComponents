@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
-#import "LTxSipprMacroDef.h"
+#import "LTxSipprConfig.h"
 
 @interface LTxSipprCameraUtil : NSObject
 

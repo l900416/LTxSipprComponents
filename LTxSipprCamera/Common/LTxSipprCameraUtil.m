@@ -105,7 +105,7 @@
 }
 //获取自定义相册
 + (PHAssetCollection *)getDestinationCollection{
-    if (!LTXSIPPR_CAMERA_ALBUM_SAVE_USE_CUSTOM) {
+    if (![LTxSipprConfig sharedInstance].cameraAlbumCustom) {
         return [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil].lastObject;
     }
     NSString* albumName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];

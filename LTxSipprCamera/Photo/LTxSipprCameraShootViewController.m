@@ -368,7 +368,7 @@
     
     [self addConstraintsOnComponents];
     
-    _focusCursorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:LTxSipprBundleImagePath(@"ic_camera_focus")]];
+    _focusCursorImageView = [[UIImageView alloc] initWithImage:LTxSipprBundlePngImageWithName(@"ic_camera_focus")];
     [self.view addSubview:_focusCursorImageView];
 }
 
@@ -401,7 +401,7 @@
     if (!_toggleCameraBtn) {
         _toggleCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _toggleCameraBtn.translatesAutoresizingMaskIntoConstraints = NO;
-        [_toggleCameraBtn setImage:[UIImage imageNamed:LTxSipprBundleImagePath(@"ic_camera_action_toggle")] forState:UIControlStateNormal];
+        [_toggleCameraBtn setImage:LTxSipprBundlePngImageWithName(@"ic_camera_action_toggle") forState:UIControlStateNormal];
         [_toggleCameraBtn addTarget:self action:@selector(btnToggleCameraAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _toggleCameraBtn;

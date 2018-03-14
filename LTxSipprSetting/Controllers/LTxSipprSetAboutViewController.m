@@ -44,7 +44,7 @@
     _versionL = [[UILabel alloc] init];
     _versionL.translatesAutoresizingMaskIntoConstraints = NO;
     NSString* versionText;
-    if (IS_DEBUG) {
+    if ([LTxSipprConfig sharedInstance].isDebug) {
         versionText = [NSString stringWithFormat:@"%@：v%@ T",LTxSipprLocalizedStringWithKey(@"text_setting_about_current_version"),[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
     }else{
         versionText = [NSString stringWithFormat:@"%@：v%@",LTxSipprLocalizedStringWithKey(@"text_setting_about_current_version"),[infoDictionary objectForKey:@"CFBundleShortVersionString"]];

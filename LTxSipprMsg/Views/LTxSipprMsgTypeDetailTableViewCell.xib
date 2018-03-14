@@ -95,6 +95,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="attachImageView" destination="zv7-Ud-y5e" id="lla-ZF-xlU"/>
+                <outlet property="bgView" destination="Bsg-to-ccO" id="53A-2V-Trc"/>
                 <outlet property="contentL" destination="R23-k8-ylL" id="DvA-XH-M4p"/>
                 <outlet property="dateL" destination="Z7D-3e-syg" id="uDR-y3-Wou"/>
                 <outlet property="nameL" destination="KKO-F8-GIV" id="kj7-cT-5gR"/>

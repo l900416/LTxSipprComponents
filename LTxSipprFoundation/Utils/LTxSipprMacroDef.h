@@ -24,21 +24,25 @@ typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
 
 #define SelfBundle  [NSBundle bundleForClass:[self class]]
 
-#define LTxSipprBundleImagePath(fileName) [@"Frameworks/LTxSippr.framework/LTxSipprComponents.bundle/Images" stringByAppendingPathComponent:fileName]
-
+//获取Bundle中的image
 #define LTxSipprBundlePngImageWithName(imageName) [UIImage imageWithContentsOfFile: [SelfBundle pathForResource:[NSString stringWithFormat:@"LTxSipprComponents.bundle/Images/%@",imageName] ofType:@"png"]]
 
-
-/**
- * 宏定义
- **/
-#define IS_DEBUG   YES
-#define LTXSIPPR_CAMERA_ALBUM_SAVE_USE_CUSTOM   YES// 保存相片/视频时，是否使用自定义相册
+//测试用
+#define TEST_LTxSipprBundleImage(imageName) [UIImage imageNamed:[@"LTxSipprComponents.bundle/Images" stringByAppendingPathComponent:imageName]]
 
 /**
  * 语言配置
  **/
 #define LTxSipprLocalizedStringWithKey(key)  NSLocalizedStringFromTableInBundle(key,@"Frameworks/LTxSippr.framework/LTxSipprComponents.bundle/Language/LTxSippr",[NSBundle mainBundle],nil)
+
+
+
+/**
+ * Notification 通知
+ **/
+
+#define LTX_NOTIFICATION_MSG_DID_SELECT_KEY @"LTx_Notification_Msg_Did_Select_Key"//消息被点击时发送的通知
+
 
 
 

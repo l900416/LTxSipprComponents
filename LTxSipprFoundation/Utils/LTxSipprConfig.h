@@ -12,19 +12,6 @@
 
 
 
-
-
-
-/**
- * Notification 通知
- **/
-
-#define LTX_NOTIFICATION_MSG_DID_SELECT_KEY @"LTx_Notification_Msg_Did_Select_Key"//消息被点击时发送的通知
-
-
-
-
-
 /**
  * 配置相关
  **/
@@ -46,10 +33,19 @@
 @property (nonatomic, strong) UIColor* activityViewBackgroundColor;
 @property (nonatomic, strong) UIColor* viewBackgroundColor;
 @property (nonatomic, strong) UIColor* cellContentViewColor;
+@property (nonatomic, assign) CGColorRef cellContentViewShadowColor;
+
+#pragma mark
+
+@property (nonatomic, readonly) BOOL isDebug;
+
+#pragma mark - 签名验证
+@property (nonatomic, readonly) BOOL signature;//是否开启签名验证
+@property (nonatomic, readonly) NSString* signatureToken;//签名验证时的Token
 
 #pragma mark - host
 @property (nonatomic, strong) NSString* messageHost;
-@property (nonatomic, strong) NSString* baseHost;
+@property (nonatomic, strong) NSString* eepmHost;
 
 #pragma mark - 系统配置
 @property (nonatomic, strong) NSString* appId;
@@ -59,4 +55,5 @@
 #pragma mark - 其他
 @property (nonatomic, strong) NSString* instalUrl;
 @property (nonatomic, strong) NSString* instalTip;
+@property (nonatomic, assign) BOOL cameraAlbumCustom;// 保存相片/视频时，是否使用自定义相册
 @end

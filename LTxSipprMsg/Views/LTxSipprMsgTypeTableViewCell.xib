@@ -97,6 +97,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="bgView" destination="zOf-OW-glL" id="AE5-h1-L1e"/>
                 <outlet property="contentL" destination="Mwu-oP-2YP" id="7pn-Sh-88B"/>
                 <outlet property="countL" destination="tO6-uM-EMS" id="kBK-oD-R9C"/>
                 <outlet property="dateL" destination="3xj-ZE-RG1" id="WsV-sF-fe7"/>

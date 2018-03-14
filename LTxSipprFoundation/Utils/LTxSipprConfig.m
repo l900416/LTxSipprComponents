@@ -8,6 +8,14 @@
 
 #import "LTxSipprConfig.h"
 
+@interface LTxSipprConfig()
+
+@property (nonatomic, readwrite) BOOL isDebug;
+
+@property (nonatomic, readwrite) BOOL signature;//是否开启签名验证
+@property (nonatomic, strong, readwrite) NSString* signatureToken;//签名验证时的Token
+@end
+
 @implementation LTxSipprConfig
 
 /**
@@ -18,7 +26,7 @@ static LTxSipprConfig *_instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [[LTxSipprConfig alloc] init];
-        [_instance setupInitValues];
+        [_instance setupInitConfigValues];
     });
     
     return _instance;
@@ -34,27 +42,54 @@ static LTxSipprConfig *_instance;
 }
 
 /*默认设置*/
--(void)setupInitValues{
+-(void)setupInitConfigValues{
     /*颜色*/
     _skinColor = [UIColor colorWithRed:59/255.0 green:145/255.0 blue:233/255.0 alpha:1];
     _hintColor = [UIColor colorWithRed:240/255.0 green:173/255.0 blue:78/255.0 alpha:1];
     _activityViewBackgroundColor = [UIColor lightGrayColor];
     _viewBackgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
     _cellContentViewColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1];
+    _cellContentViewShadowColor = [UIColor lightGrayColor].CGColor;
     
-    /*HOST*/
-    _messageHost = @"http://125.46.29.147:8852/eepj_push";
-    _baseHost = @"http://125.46.29.147:8851";
+    /*配置参数*/
+    NSURL* configFileURL = [[NSBundle mainBundle] URLForResource:@"LTxSipprConfig" withExtension:@"plist"];
+    if (configFileURL) {
+        NSDictionary* configDic = [NSDictionary dictionaryWithContentsOfURL:configFileURL];
+        NSString* type = [configDic objectForKey:@"type"];
+        NSDictionary* typeDic = [configDic objectForKey:type];
+        
+        //版本信息
+        _isDebug = [type isEqualToString:@"debug"];
+        
+        //签名验证
+        _signatureToken = [configDic objectForKey:@"signature"];
+        _signature = _signatureToken != nil;
+        
     
-    /*系统配置*/
-    _appId = @"4f424ed4-b0f1-4af7-9567-aef6cd23d01a";
-    _userId = @"sa00000004/b418d14ae6ad";
-    _pageSize = 20;
+        _appId = [typeDic objectForKey:@"appId"];
+        _pageSize = [[typeDic objectForKey:@"pageSize"] integerValue];
+        _messageHost = [typeDic objectForKey:@"messageHost"];
+        _eepmHost = [typeDic objectForKey:@"eepmHost"];
+        _instalUrl = [typeDic objectForKey:@"instalUrl"];
+        _instalTip = [typeDic objectForKey:@"instalTip"];
+        _cameraAlbumCustom = [[typeDic objectForKey:@"cameraAlbumCustom"] boolValue];
+    }else{//默认配置
+        /*HOST*/
+        _messageHost = @"http://125.46.29.147:8852/eepj_push";
+        _eepmHost = @"http://125.46.29.147:8851/eepm";
+        
+        /*系统配置*/
+        _appId = @"4f424ed4-b0f1-4af7-9567-aef6cd23d01a";
+        _pageSize = 20;
+        
+        /*其他*/
+        _instalUrl = @"http://192.168.1.75:8801/eepm";
+        _instalTip = @"在苹果设备上安装的重要提示：\
+        \n1.扫码后,确保“切换到苹果自带的Safari浏览器打开网页”，方能成功安装！\
+        \n2.针对iOS9及以上版本的用户，打开本应用时你可能会收到“未受信任的企业级开发者”的提示。此时，你需按照以下步骤手工完成设置（苹果官方最新安全要求）：进入[设置]>[通用]>[描述文件]>[企业级应用]>[Sippr Enginnering Group Co., LTD.]，点击“信任...”或进入[设置]>[通用]>[设备管理]>[Sippr Enginnering Group Co., LTD.]，点击“信任...”。";
+        _cameraAlbumCustom = YES;
+    }
     
-    /*其他*/
-    _instalUrl = @"http://192.168.1.75:8801/eepm";
-    _instalTip = @"在苹果设备上安装的重要提示：\
-    \n1.扫码后,确保“切换到苹果自带的Safari浏览器打开网页”，方能成功安装！\
-    \n2.针对iOS9及以上版本的用户，打开本应用时你可能会收到“未受信任的企业级开发者”的提示。此时，你需按照以下步骤手工完成设置（苹果官方最新安全要求）：进入[设置]>[通用]>[描述文件]>[企业级应用]>[Sippr Enginnering Group Co., LTD.]，点击“信任...”或进入[设置]>[通用]>[设备管理]>[Sippr Enginnering Group Co., LTD.]，点击“信任...”。";
+    
 }
 @end

@@ -9,13 +9,99 @@
 #import "LTxSipprHttpService.h"
 #import "AFNetworking.h"
 #import "LTxSipprCheckUtil.h"
+#import "LTxSipprConfig.h"
+#import "LTxSipprCategories.h"
+
+
+@interface LTxSipprHTTPSessionManager :AFHTTPSessionManager
+@end
+
+@implementation LTxSipprHTTPSessionManager
+//重写方法，像Request中添加签名验证信息
+- (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
+                                       URLString:(NSString *)URLString
+                                      parameters:(id)parameters
+                                  uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
+                                downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
+                                         success:(void (^)(NSURLSessionDataTask *, id))success
+                                         failure:(void (^)(NSURLSessionDataTask *, NSError *))failure{
+    NSError *serializationError = nil;
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
+    if (serializationError) {
+        if (failure) {
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                failure(nil, serializationError);
+            });
+        }
+        
+        return nil;
+    }
+    
+    if ([LTxSipprConfig sharedInstance].signature) {
+        /*添加签名信息*/
+        NSString* token = [LTxSipprConfig sharedInstance].signatureToken;
+        NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
+        NSMutableString* stringBuffer = [[NSMutableString alloc] init];
+        if ([parameters isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* parametersDic = (NSDictionary*)parameters;
+            NSArray* sortedKeyArray = [parametersDic.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString* key1, NSString* key2)  {
+                return [key1 compare:key2];
+            }];
+            for (NSString* key in sortedKeyArray) {
+                id object = [parametersDic objectForKey:key];
+                NSString* keyValueElement = [NSString stringWithFormat:@"&%@=%@",key,object];
+                if (keyValueElement) {
+                    [stringBuffer appendString:keyValueElement];
+                }
+            }
+        }
+        [stringBuffer insertString:[token substringToIndex:32] atIndex:0];
+        [stringBuffer insertString:[NSString stringWithFormat:@"%.0f&",timestamp] atIndex:0];
+        //对stringBuffer进行MD5加密，之后添加到Request中
+        NSString* calcSgin = [stringBuffer jk_md5String];
+        NSLog(@"\n***********calcSign加密***********\n前：%@\n后：%@\n",stringBuffer,calcSgin);
+
+        [request setValue:token forHTTPHeaderField:@"token"];
+        [request setValue:[NSString stringWithFormat:@"%.0f",timestamp] forHTTPHeaderField:@"timestamp"];
+        [request setValue:calcSgin forHTTPHeaderField:@"sign"];
+        
+        NSLog(@"====================Request Header Log====================");
+        NSLog(@"Content-Type = %@",[request valueForHTTPHeaderField:@"Content-Type"]);
+        NSLog(@"accept-language = %@",[request valueForHTTPHeaderField:@"accept-language"]);
+        NSLog(@"user-agent = %@",[request valueForHTTPHeaderField:@"user-agent"]);
+        NSLog(@"token = %@",[request valueForHTTPHeaderField:@"token"]);
+        NSLog(@"timestamp = %@",[request valueForHTTPHeaderField:@"timestamp"]);
+        NSLog(@"sign = %@",[request valueForHTTPHeaderField:@"sign"]);
+        NSLog(@"==========================================================");
+    }
+    
+    __block NSURLSessionDataTask *dataTask = nil;
+    dataTask = [self dataTaskWithRequest:request
+                          uploadProgress:uploadProgress
+                        downloadProgress:downloadProgress
+                       completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+                           if (error) {
+                               if (failure) {
+                                   failure(dataTask, error);
+                               }
+                           } else {
+                               if (success) {
+                                   success(dataTask, responseObject);
+                               }
+                           }
+                       }];
+    
+    return dataTask;
+}
+
+@end
 
 @implementation LTxSipprHttpService
 
 + (NSURLSessionDataTask*)doGetWithURL:(NSString*)url
                                 param:(NSDictionary*)param
                              complete:(completeBlock)complete{
-    AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
     manager.requestSerializer.timeoutInterval = 10.f;
     
@@ -34,7 +120,7 @@
 + (NSURLSessionDataTask*)doPostWithURL:(NSString*)url
                                  param:(NSDictionary*)param
                               complete:(completeBlock)complete{
-    AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
     manager.requestSerializer.timeoutInterval = 10.f;
     
@@ -53,7 +139,7 @@
 + (NSURLSessionDataTask*)doPutWithURL:(NSString*)url
                                 param:(NSDictionary*)param
                              complete:(completeBlock)complete{
-    AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
     manager.requestSerializer.timeoutInterval = 10.f;
     
@@ -72,7 +158,7 @@
 + (NSURLSessionDataTask*)doDeleteWithURL:(NSString*)url
                                    param:(NSDictionary*)param
                                 complete:(completeBlock)complete{
-    AFHTTPSessionManager *manager  = [AFHTTPSessionManager manager];
+    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
     manager.requestSerializer.timeoutInterval = 10.f;
     
@@ -94,7 +180,7 @@
                                    progress:( void (^)(NSProgress *progress))progress
                                    complete:(completeBlock)complete{
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    LTxSipprHTTPSessionManager *manager = [LTxSipprHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
     //    manager.requestSerializer.timeoutInterval = 20.f;
     

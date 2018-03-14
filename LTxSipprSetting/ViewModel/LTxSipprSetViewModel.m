@@ -35,7 +35,7 @@
     if (opinion) {
         [params setObject:opinion forKey:@"feedbackContent"];
     }
-    NSString* url = [NSString stringWithFormat:@"%@/eepm/v1/api/feedback",config.baseHost];
+    NSString* url = [NSString stringWithFormat:@"%@/v1/api/mobile/feedback",config.eepmHost];
     //网络访问
     [LTxSipprHttpService doPostWithURL:url param:params complete:^(id data, NSString *errorTips) {
         if (complete) {
@@ -65,7 +65,7 @@
         [params setObject:appVersion forKey:@"currentVer"];
     }
 
-    NSString* url = [NSString stringWithFormat:@"%@/eepm/v1/api/update",config.baseHost];
+    NSString* url = [NSString stringWithFormat:@"%@/v1/api/mobile/update",config.eepmHost];
     //网络访问
     [LTxSipprHttpService doGetWithURL:url param:params complete:^(id data, NSString *errorTips) {
         if (complete) {
@@ -104,7 +104,7 @@
         [params setObject:appVersion forKey:@"currentVer"];
     }
     
-    NSString* url = [NSString stringWithFormat:@"%@/eepm/v1/api/updateHistory",config.baseHost];
+    NSString* url = [NSString stringWithFormat:@"%@/v1/api/updateHistory",config.eepmHost];
     //网络访问
     [LTxSipprHttpService doGetWithURL:url param:params complete:^(id data, NSString *errorTips) {
         if (complete) {

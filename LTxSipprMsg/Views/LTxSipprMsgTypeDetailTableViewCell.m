@@ -9,6 +9,7 @@
 #import "LTxSipprMsgTypeDetailTableViewCell.h"
 
 @interface LTxSipprMsgTypeDetailTableViewCell()
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *stateImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameL;
 @property (weak, nonatomic) IBOutlet UILabel *contentL;
