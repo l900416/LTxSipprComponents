@@ -56,7 +56,7 @@ static LTxSipprConfig *_instance;
     if (configFileURL) {
         NSDictionary* configDic = [NSDictionary dictionaryWithContentsOfURL:configFileURL];
         NSString* type = [configDic objectForKey:@"type"];
-        NSDictionary* typeDic = [configDic objectForKey:type];
+        
         
         //版本信息
         _isDebug = [type isEqualToString:@"debug"];
@@ -64,15 +64,20 @@ static LTxSipprConfig *_instance;
         //签名验证
         _signatureToken = [configDic objectForKey:@"signature"];
         _signature = _signatureToken != nil;
+        _appId = [configDic objectForKey:@"appId"];
+        _pageSize = [[configDic objectForKey:@"pageSize"] integerValue];
+        _instalTip = [configDic objectForKey:@"instalTip"];
+        _cameraAlbumCustom = [[configDic objectForKey:@"cameraAlbumCustom"] boolValue];
         
-    
-        _appId = [typeDic objectForKey:@"appId"];
-        _pageSize = [[typeDic objectForKey:@"pageSize"] integerValue];
-        _messageHost = [typeDic objectForKey:@"messageHost"];
-        _eepmHost = [typeDic objectForKey:@"eepmHost"];
+        //HOST
+        NSDictionary* typeDic = [configDic objectForKey:type];
         _instalUrl = [typeDic objectForKey:@"instalUrl"];
-        _instalTip = [typeDic objectForKey:@"instalTip"];
-        _cameraAlbumCustom = [[typeDic objectForKey:@"cameraAlbumCustom"] boolValue];
+        _host = [typeDic objectForKey:@"host"];
+        
+        //缓存中读取 - 防止由于host获取失败导致无法继续更新的问题
+        _messageHost = [NSUserDefaults lt_objectForKey:USERDEFAULT_APP_MSG_HOST];
+        _eepmHost = [NSUserDefaults lt_objectForKey:USERDEFAULT_APP_UPDATE_HOST];
+        _serviceHost = [NSUserDefaults lt_objectForKey:USERDEFAULT_APP_SERVICE_HOST];
     }else{//默认配置
         /*HOST*/
         _messageHost = @"http://125.46.29.147:8852/eepj_push";

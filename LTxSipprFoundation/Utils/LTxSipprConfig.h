@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "LTxSipprMacroDef.h"
-
+#import "NSUserDefaults+LTxSippr.h"
 
 
 /**
@@ -44,8 +44,10 @@
 @property (nonatomic, readonly) NSString* signatureToken;//签名验证时的Token
 
 #pragma mark - host
+@property (nonatomic, strong) NSString* host;
 @property (nonatomic, strong) NSString* messageHost;
 @property (nonatomic, strong) NSString* eepmHost;
+@property (nonatomic, strong) NSString* serviceHost;
 
 #pragma mark - 系统配置
 @property (nonatomic, strong) NSString* appId;
