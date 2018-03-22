@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "LTxSippr"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "Components For Sippr. "
   s.license      = "MIT"
   s.author             = { "liangtong" => "l900416@163.com" }
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   # 资源模块
   s.subspec 'Support' do |sp|
-    sp.resources = 'Resources/LTxSipprComponents.bundle', 'Resources/Language'
+    sp.resources = 'Resources/LTxSipprComponents.bundle'
   end
 
 
@@ -29,11 +29,17 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |sp|
     # 依赖
     sp.dependency 'LTxSippr/Support'
+    # Model
+    sp.subspec 'Model' do |ssp|
+        ssp.source_files  =  "LTxSipprFoundation/Model/*.{h,m}"
+        ssp.public_header_files = "LTxSipprFoundation/Model/**/*.h"
+    end
 
     # Utils
     sp.subspec 'Utils' do |ssp|
         ssp.source_files  =  "LTxSipprFoundation/Utils/*.{h,m}"
         ssp.public_header_files = "LTxSipprFoundation/Utils/**/*.h"
+        ssp.dependency 'LTxSippr/Core/Model'
     end
 
     # Views
