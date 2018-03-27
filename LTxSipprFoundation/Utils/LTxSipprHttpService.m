@@ -98,12 +98,22 @@
 
 @implementation LTxSipprHttpService
 
+static LTxSipprHTTPSessionManager *_sharedManager;
++ (LTxSipprHTTPSessionManager*)sharedManager{
+    static dispatch_once_t onceTokenLTxSipprHTTPSessionManager;
+    dispatch_once(&onceTokenLTxSipprHTTPSessionManager, ^{
+        _sharedManager = [LTxSipprHTTPSessionManager manager];
+        _sharedManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
+        _sharedManager.requestSerializer.timeoutInterval = 10.f;
+    });
+    
+    return _sharedManager;
+}
+
 + (NSURLSessionDataTask*)doGetWithURL:(NSString*)url
                                 param:(NSDictionary*)param
                              complete:(completeBlock)complete{
-    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
-    manager.requestSerializer.timeoutInterval = 10.f;
+    LTxSipprHTTPSessionManager *manager  =  [LTxSipprHttpService sharedManager];
     
     return [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id _Nullable responseObject) {
         [LTxSipprHttpService handleHttpResponseWithStatusCode:((NSHTTPURLResponse*)(task.response)).statusCode
@@ -120,9 +130,7 @@
 + (NSURLSessionDataTask*)doPostWithURL:(NSString*)url
                                  param:(NSDictionary*)param
                               complete:(completeBlock)complete{
-    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
-    manager.requestSerializer.timeoutInterval = 10.f;
+    LTxSipprHTTPSessionManager *manager  =  [LTxSipprHttpService sharedManager];
     
     return [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id _Nullable responseObject) {
         [LTxSipprHttpService handleHttpResponseWithStatusCode:((NSHTTPURLResponse*)(task.response)).statusCode
@@ -139,9 +147,7 @@
 + (NSURLSessionDataTask*)doPutWithURL:(NSString*)url
                                 param:(NSDictionary*)param
                              complete:(completeBlock)complete{
-    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
-    manager.requestSerializer.timeoutInterval = 10.f;
+    LTxSipprHTTPSessionManager *manager  =  [LTxSipprHttpService sharedManager];
     
     return [manager PUT:url parameters:param success:^(NSURLSessionDataTask *task, id _Nullable responseObject) {
         [LTxSipprHttpService handleHttpResponseWithStatusCode:((NSHTTPURLResponse*)(task.response)).statusCode
@@ -158,9 +164,7 @@
 + (NSURLSessionDataTask*)doDeleteWithURL:(NSString*)url
                                    param:(NSDictionary*)param
                                 complete:(completeBlock)complete{
-    LTxSipprHTTPSessionManager *manager  = [LTxSipprHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
-    manager.requestSerializer.timeoutInterval = 10.f;
+    LTxSipprHTTPSessionManager *manager  =  [LTxSipprHttpService sharedManager];
     
     return [manager DELETE:url parameters:param success:^(NSURLSessionDataTask *task, id _Nullable responseObject) {
         [LTxSipprHttpService handleHttpResponseWithStatusCode:((NSHTTPURLResponse*)(task.response)).statusCode
@@ -180,9 +184,7 @@
                                    progress:( void (^)(NSProgress *progress))progress
                                    complete:(completeBlock)complete{
     
-    LTxSipprHTTPSessionManager *manager = [LTxSipprHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
-    //    manager.requestSerializer.timeoutInterval = 20.f;
+    LTxSipprHTTPSessionManager *manager = [LTxSipprHttpService sharedManager];
     
     return [manager POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (int i = 0;  i < [fileArray count]; ++i) {

@@ -23,9 +23,9 @@ typedef void (^LTxSipprArrayAndStringCallbackBlock)(NSArray*,NSString*);
 typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*);
 typedef void (^LTxSipprImageAndURLCallbackBlock)(UIImage*,NSURL*);
 
-typedef void (^LTxSipprBoolBoolAndStringCallbackBlock)(BOOL,BOOL,NSString*);
-typedef void (^LTxSipprBoolStringAndDictionaryCallbackBlock)(BOOL,NSString*,NSDictionary*);
 
+typedef void (^LTxSipprBoolStringAndDictionaryCallbackBlock)(BOOL,NSString*,NSDictionary*);
+typedef void (^LTxSipprBoolBoolDictionaryAndStringCallbackBlock)(BOOL,BOOL,NSDictionary*,NSString*);
 
 #define SelfBundle  [NSBundle bundleForClass:[self class]]
 

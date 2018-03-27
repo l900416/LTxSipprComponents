@@ -55,4 +55,14 @@
  **/
 +(void)msgDetailWithMsgRowGuid:(NSString*)messageRowGuid complete:(LTxSipprDictionaryAndStringCallbackBlock)complete;
 
+#pragma mark - SMS
+/**
+ * 发送验证码
+ **/
++(void)sendSmsCode:(NSString*)phoneNumber operateType:(NSInteger)operateType complete:(LTxSipprStringCallbackBlock)complete;
+/**
+ * 发送验证码
+ **/
++(void)validateSmsCode:(NSString*)phoneNumber authCode:(NSString*)authCode complete:(LTxSipprStringCallbackBlock)complete;
+
 @end

@@ -161,7 +161,6 @@
 @property (readonly) NSString *jk_sha384String;
 /// 返回结果：128长度   终端命令：echo -n "123" | openssl sha -sha512
 @property (readonly) NSString *jk_sha512String;
-
 #pragma mark - HMAC
 /// 返回结果：32长度  终端命令：echo -n "123" | openssl dgst -md5 -hmac "123"
 - (NSString *)jk_hmacMD5StringWithKey:(NSString *)key;
@@ -186,4 +185,13 @@
 + (UIColor *)jk_colorWithWholeRed:(CGFloat)red
                             green:(CGFloat)green
                              blue:(CGFloat)blue;
+@end
+
+@interface NSDictionary (JKJSONString)
+/**
+ *  @brief NSDictionary转换成JSON字符串
+ *
+ *  @return  JSON字符串
+ */
+-(NSString *)jk_JSONString;
 @end

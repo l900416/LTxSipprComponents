@@ -49,7 +49,7 @@
  *    @brief    检查版本更新
  */
 ///#end
-+(void)appUpdateCheckComplete:(LTxSipprBoolBoolAndStringCallbackBlock)complete{
++(void)appUpdateCheckComplete:(LTxSipprBoolBoolDictionaryAndStringCallbackBlock)complete{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     LTxSipprConfig* config = [LTxSipprConfig sharedInstance];
     if (config.userId) {
@@ -78,7 +78,7 @@
             if (newVersionExists){
                 updateForced = [[updateInfo objectForKey:@"forceUpdate"] boolValue];
             }
-            complete(newVersionExists,updateForced,errorTips);
+            complete(newVersionExists,updateForced,updateInfo,errorTips);
         }
     }];
 }

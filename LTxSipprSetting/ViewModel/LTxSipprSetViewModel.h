@@ -24,7 +24,7 @@
  *    @brief    检查版本更新
  */
 ///#end
-+(void)appUpdateCheckComplete:(LTxSipprBoolBoolAndStringCallbackBlock)complete;
++(void)appUpdateCheckComplete:(LTxSipprBoolBoolDictionaryAndStringCallbackBlock)complete;
 
 ///#begin
 /**

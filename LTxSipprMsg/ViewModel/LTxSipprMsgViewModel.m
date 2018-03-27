@@ -253,5 +253,60 @@
         }
     }];
 }
+#pragma mark - SMS
+/**
+ * 发送验证码
+ **/
++(void)sendSmsCode:(NSString*)phoneNumber operateType:(NSInteger)operateType complete:(LTxSipprStringCallbackBlock)complete{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    NSString* deviceCode = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    LTxSipprConfig* config = [LTxSipprConfig sharedInstance];
+    if (config.appId) {
+        [params setObject:config.appId forKey:@"appId"];
+    }
+    if (phoneNumber) {
+        [params setObject:phoneNumber forKey:@"phoneNumber"];
+    }
+    if (deviceCode) {
+        [params setObject:deviceCode forKey:@"deviceCode"];
+    }
+    [params setObject:@"iOS" forKey:@"platform"];
+    [params setObject:[NSNumber numberWithInt:operateType] forKey:@"operateType"];
+    NSString* url = [NSString stringWithFormat:@"%@/v1/api/mobile/sms/send",config.messageHost];
+    //网络访问
+    [LTxSipprHttpService doGetWithURL:url param:params complete:^(id data, NSString *errorTips) {
+        if (complete) {
+            complete( errorTips);
+        }
+    }];
+}
+/**
+ * 发送验证码
+ **/
++(void)validateSmsCode:(NSString*)phoneNumber authCode:(NSString*)authCode complete:(LTxSipprStringCallbackBlock)complete{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    NSString* deviceCode = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    LTxSipprConfig* config = [LTxSipprConfig sharedInstance];
+    if (config.appId) {
+        [params setObject:config.appId forKey:@"appId"];
+    }
+    if (phoneNumber) {
+        [params setObject:phoneNumber forKey:@"phoneNumber"];
+    }
+    if (authCode) {
+        [params setObject:authCode forKey:@"smsCode"];
+    }
+    if (deviceCode) {
+        [params setObject:deviceCode forKey:@"deviceCode"];
+    }
+    [params setObject:@"iOS" forKey:@"platform"];
+    NSString* url = [NSString stringWithFormat:@"%@/v1/api/mobile/sms/check",config.messageHost];
+    //网络访问
+    [LTxSipprHttpService doPostWithURL:url param:params complete:^(id data, NSString *errorTips) {
+        if (complete) {
+            complete( errorTips);
+        }
+    }];
+}
 
 @end
