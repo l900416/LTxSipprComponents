@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "LTxSippr"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "Components For Sippr. "
   s.license      = "MIT"
   s.author             = { "liangtong" => "l900416@163.com" }
@@ -129,7 +129,7 @@ Pod::Spec.new do |s|
   # Camera模块
   s.subspec 'Camera' do |sp|
     sp.dependency 'LTxSippr/Core'
-
+    sp.dependency 'SGQRCode', '~> 2.2.0'
     # Common
     sp.subspec 'Common' do |ssp|
         ssp.source_files  =  "LTxSipprCamera/Common/*.{h,m}"
