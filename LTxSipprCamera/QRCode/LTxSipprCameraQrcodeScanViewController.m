@@ -53,7 +53,9 @@
     if(status == AVAuthorizationStatusAuthorized) {
 #if TARGET_IPHONE_SIMULATOR//模拟器
 #elif TARGET_OS_IPHONE//真机
-        [self setupScanningQRCode];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setupScanningQRCode];
+        });
 #endif
         [self.scanView addTimer];
     }else if(status == AVAuthorizationStatusNotDetermined){
@@ -62,9 +64,13 @@
             if(granted){//点击允许访问时调用
 #if TARGET_IPHONE_SIMULATOR//模拟器
 #elif TARGET_OS_IPHONE//真机
-                [self setupScanningQRCode];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setupScanningQRCode];
+                });
 #endif
-                [self.scanView addTimer];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.scanView addTimer];
+                });
             }else{
                 [LTxSipprPopup  showToast:LTxSipprLocalizedStringWithKey(@"text_camera_authorization_do_deny") onView:self.navigationController.view];
                 [self.navigationController popViewControllerAnimated:true];
@@ -179,12 +185,10 @@
                 [self dismissViewControllerAnimated:true completion:nil];
             };
         });
-    }else{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            _scanResult = NO;
-        });
     }
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _scanResult = NO;
+    });
 }
 
 
@@ -201,6 +205,7 @@
     
     _scanView = [[LTxSipprCameraQrcodeScanView alloc] init];
     _scanView.translatesAutoresizingMaskIntoConstraints = NO;
+    _scanView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_scanView];
     [self addConstraintsOnComponents];
 }

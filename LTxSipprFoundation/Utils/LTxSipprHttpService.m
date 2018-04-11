@@ -60,7 +60,7 @@
         //对stringBuffer进行MD5加密，之后添加到Request中
         NSString* calcSgin = [stringBuffer jk_md5String];
         NSLog(@"\n***********calcSign加密***********\n前：%@\n后：%@\n",stringBuffer,calcSgin);
-
+        
         [request setValue:token forHTTPHeaderField:@"token"];
         [request setValue:[NSString stringWithFormat:@"%.0f",timestamp] forHTTPHeaderField:@"timestamp"];
         [request setValue:calcSgin forHTTPHeaderField:@"sign"];
@@ -180,18 +180,16 @@ static LTxSipprHTTPSessionManager *_sharedManager;
 
 + (NSURLSessionDataTask*)doMultiPostWithURL:(NSString *)url
                                       param:(NSDictionary*)param
-                                  fileArray:(NSArray*)fileArray
+                              filePathArray:(NSArray*)filePathArray
                                    progress:( void (^)(NSProgress *progress))progress
                                    complete:(completeBlock)complete{
     
     LTxSipprHTTPSessionManager *manager = [LTxSipprHttpService sharedManager];
     
     return [manager POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        for (int i = 0;  i < [fileArray count]; ++i) {
-            NSDictionary* fileItem = [fileArray objectAtIndex:i];
-            NSURL* fileURL = [fileItem objectForKey:@"fileURL"];
-            NSString* fileName = [fileItem objectForKey:@"fileName"];
-            [formData appendPartWithFileURL:fileURL
+        for (NSURL* filePath in filePathArray) {
+            NSString* fileName = filePath.path.lastPathComponent;
+            [formData appendPartWithFileURL:filePath
                                        name:fileName
                                       error:nil];
         }

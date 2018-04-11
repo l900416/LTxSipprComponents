@@ -65,6 +65,7 @@ static LTxSipprConfig *_instance;
         _signatureToken = [configDic objectForKey:@"signature"];
         _signature = _signatureToken != nil;
         _appId = [configDic objectForKey:@"appId"];
+        _pushId = [configDic objectForKey:@"pushId"];
         _pageSize = [[configDic objectForKey:@"pageSize"] integerValue];
         _instalTip = [configDic objectForKey:@"instalTip"];
         _cameraAlbumCustom = [[configDic objectForKey:@"cameraAlbumCustom"] boolValue];

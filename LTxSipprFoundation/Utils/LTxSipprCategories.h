@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
 
 #define LT_DATE_MINUTE    60
 #define LT_DATE_HOUR    3600
@@ -30,6 +31,18 @@
 
 + (NSString *)lt_timeDescriptionWithDateString:(NSString*)dateString;
 
+- (NSString *)stringWithFormate:(NSString*)formate;
+
+/**
+ * 根据日期返回字符串
+ */
++ (NSString *)jk_stringWithDate:(NSDate *)date format:(NSString *)format;
+- (NSString *)jk_stringWithFormat:(NSString *)format;
++ (NSDate *)jk_dateWithString:(NSString *)string format:(NSString *)format;
+/**
+ *  日期是否相等
+  */
+- (BOOL)jk_isSameDay:(NSDate *)anotherDate;
 @end
 
 
@@ -194,4 +207,25 @@
  *  @return  JSON字符串
  */
 -(NSString *)jk_JSONString;
+@end
+
+@interface UITextView (JKPlaceHolder) <UITextViewDelegate>
+@property (nonatomic, strong) UITextView *jk_placeHolderTextView;
+- (void)jk_addPlaceHolder:(NSString *)placeHolder;
+@end
+@interface NSDictionary (JKURL)
+/**
+ *  @brief  将url参数转换成NSDictionary
+ *
+ *  @param query url参数
+ *
+ *  @return NSDictionary
+ */
++ (NSDictionary *)jk_dictionaryWithURLQuery:(NSString *)query;
+/**
+ *  @brief  将NSDictionary转换成url 参数字符串
+ *
+ *  @return url 参数字符串
+ */
+- (NSString *)jk_URLQueryString;
 @end

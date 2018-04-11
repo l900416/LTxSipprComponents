@@ -34,7 +34,7 @@ typedef void (^completeBlock)(id data, NSString* errorTips);
 
 + (NSURLSessionDataTask*)doMultiPostWithURL:(NSString *)url
                                       param:(NSDictionary*)param
-                                  fileArray:(NSArray*)fileArray
+                              filePathArray:(NSArray*)filePathArray
                                    progress:( void (^)(NSProgress *progress))progress
                                    complete:(completeBlock)complete;
 

@@ -46,6 +46,54 @@
     NSDate *date = [inputFormatter dateFromString:dateString];
     return [date lt_timeDescription];
 }
+
+-(NSString*)stringWithFormate:(NSString*)formate{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = formate;
+    
+    NSString* dateStr = [formatter stringFromDate:self];
+    
+    return dateStr;
+}
+
++ (NSString *)jk_stringWithDate:(NSDate *)date format:(NSString *)format {
+    return [date stringWithFormate:format];
+}
+
+- (NSString *)jk_stringWithFormat:(NSString *)format {
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setDateFormat:format];
+    
+    NSString *retStr = [outputFormatter stringFromDate:self];
+    
+    return retStr;
+}
+
++ (NSDate *)jk_dateWithString:(NSString *)string format:(NSString *)format {
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:format];
+    
+    NSDate *date = [inputFormatter dateFromString:string];
+    
+    return date;
+}
+
+- (BOOL)jk_isSameDay:(NSDate *)anotherDate {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components1 = [calendar components:(NSCalendarUnitYear
+                                                          | NSCalendarUnitMonth
+                                                          | NSCalendarUnitDay)
+                                                fromDate:self];
+    NSDateComponents *components2 = [calendar components:(NSCalendarUnitYear
+                                                          | NSCalendarUnitMonth
+                                                          | NSCalendarUnitDay)
+                                                fromDate:anotherDate];
+    return ([components1 year] == [components2 year]
+            && [components1 month] == [components2 month]
+            && [components1 day] == [components2 day]);
+}
+
+
 @end
 
 
@@ -603,3 +651,95 @@ CGFloat jk_colorComponentFrom(NSString *string, NSUInteger start, NSUInteger len
     return jsonString;
 }
 @end
+static const char *jk_placeHolderTextView = "jk_placeHolderTextView";
+
+@implementation UITextView (JKPlaceHolder)
+- (UITextView *)jk_placeHolderTextView {
+    return objc_getAssociatedObject(self, jk_placeHolderTextView);
+}
+- (void)setJk_placeHolderTextView:(UITextView *)placeHolderTextView {
+    objc_setAssociatedObject(self, jk_placeHolderTextView, placeHolderTextView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
+- (void)jk_addPlaceHolder:(NSString *)placeHolder {
+    if (![self jk_placeHolderTextView]) {
+        UITextView *textView = [[UITextView alloc] initWithFrame:self.bounds];
+        textView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        textView.font = self.font;
+        textView.backgroundColor = [UIColor clearColor];
+        textView.textColor = [UIColor grayColor];
+        textView.userInteractionEnabled = NO;
+        textView.text = placeHolder;
+        [self addSubview:textView];
+        [self setJk_placeHolderTextView:textView];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:self];
+        
+    }
+    self.jk_placeHolderTextView.text = placeHolder;
+}
+# pragma mark -
+# pragma mark - UITextViewDelegate
+- (void)textViewDidBeginEditing:(NSNotification *)noti {
+    self.jk_placeHolderTextView.hidden = YES;
+}
+- (void)textViewDidEndEditing:(UITextView *)noti {
+    if (self.text && [self.text isEqualToString:@""]) {
+        self.jk_placeHolderTextView.hidden = NO;
+    }
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+@end
+
+@implementation NSDictionary (JKURI)
+/**
+ *  @brief  将url参数转换成NSDictionary
+ *
+ *  @param query url参数
+ *
+ *  @return NSDictionary
+ */
++ (NSDictionary *)jk_dictionaryWithURLQuery:(NSString *)query
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSArray *parameters = [query componentsSeparatedByString:@"&"];
+    for(NSString *parameter in parameters) {
+        NSArray *contents = [parameter componentsSeparatedByString:@"="];
+        if([contents count] == 2) {
+            NSString *key = [contents objectAtIndex:0];
+            NSString *value = [contents objectAtIndex:1];
+            value = [value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            if (key && value) {
+                [dict setObject:value forKey:key];
+            }
+        }
+    }
+    return [NSDictionary dictionaryWithDictionary:dict];
+}
+/**
+ *  @brief  将NSDictionary转换成url 参数字符串
+ *
+ *  @return url 参数字符串
+ */
+- (NSString *)jk_URLQueryString
+{
+    NSMutableString *string = [NSMutableString string];
+    for (NSString *key in [self allKeys]) {
+        if ([string length]) {
+            [string appendString:@"&"];
+        }
+        CFStringRef escaped = CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[[self objectForKey:key] description],
+                                                                      NULL,(CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                      kCFStringEncodingUTF8);
+        [string appendFormat:@"%@=%@", key, escaped];
+        CFRelease(escaped);
+    }
+    return string;
+}
+@end
+

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Photos/PHAsset.h>
 #ifndef LTxSipprMacroDef_h
 #define LTxSipprMacroDef_h
 
 typedef void (^LTxSipprCallbackBlock)(void);
 typedef void (^LTxSipprBoolCallbackBlock)(BOOL);
+typedef void (^LTxSipprFloatCallbackBlock)(CGFloat);
 typedef void (^LTxSipprIntegerCallbackBlock)(NSInteger);
 typedef void (^LTxSipprStringCallbackBlock)(NSString*);
 typedef void (^LTxSipprDictionaryCallbackBlock)(NSDictionary*);
@@ -21,8 +23,9 @@ typedef void (^LTxSipprObjectCallbackBlock)(id);
 typedef void (^LTxSipprBoolAndStringCallbackBlock)(BOOL,NSString*);
 typedef void (^LTxSipprArrayAndStringCallbackBlock)(NSArray*,NSString*);
 typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*);
+typedef void (^LTxSipprObjectAndStringCallbackBlock)(id,NSString*);
 typedef void (^LTxSipprImageAndURLCallbackBlock)(UIImage*,NSURL*);
-
+typedef void (^LTxSipprImageURLAndPHAssetCallbackBlock)(UIImage*,NSURL*,PHAsset *);
 
 typedef void (^LTxSipprBoolStringAndDictionaryCallbackBlock)(BOOL,NSString*,NSDictionary*);
 typedef void (^LTxSipprBoolBoolDictionaryAndStringCallbackBlock)(BOOL,BOOL,NSDictionary*,NSString*);

@@ -51,6 +51,7 @@
 
 #pragma mark - 系统配置
 @property (nonatomic, strong) NSString* appId;
+@property (nonatomic, strong) NSString* pushId;
 @property (nonatomic, strong) NSString* userId;
 @property (nonatomic, assign) NSInteger pageSize;
 

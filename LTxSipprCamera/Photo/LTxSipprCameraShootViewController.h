@@ -17,7 +17,11 @@ typedef NS_ENUM(NSUInteger, LTxSipprCameraShootExportVideoType) {
 
 @interface LTxSipprCameraShootViewController : LTxSipprBaseViewController
 
-@property (nonatomic, copy) LTxSipprImageAndURLCallbackBlock shootDoneCallback;
+@property (nonatomic, assign) BOOL allowTakePhoto;
+@property (nonatomic, assign) BOOL allowRecordVideo;
+@property (nonatomic, assign) NSInteger maxRecordDuration;//最大录制时常
+
+@property (nonatomic, copy) LTxSipprImageURLAndPHAssetCallbackBlock shootDoneCallback;
 @property (nonatomic, assign) LTxSipprCameraShootExportVideoType videoType;
 
 @end

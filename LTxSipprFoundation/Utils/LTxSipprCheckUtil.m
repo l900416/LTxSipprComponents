@@ -32,7 +32,7 @@
     
     NSString* retString = nil;
     if (httpStatusCode == 0) {
-        retString = @"请检查网络连接是否正常！";
+        retString = @"网络请求失败！";
     }else if (httpStatusCode > 200) {
         if (httpStatusCode >= 200 && httpStatusCode < 400) {
             retString = [NSString stringWithFormat:@"访问异常(%td)！",httpStatusCode];

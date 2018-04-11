@@ -109,10 +109,6 @@
  * done button pressed;
  **/
 -(void)doneCallback{
-    if (self.shootDoneCallback) {
-        self.shootDoneCallback(self.takedImage, self.videoUrl);
-    }
-    
     //保存相册/视频
     __weak __typeof(self) weakSelf = self;
     if (self.takedImage) {
@@ -124,6 +120,9 @@
             }else{
                 [LTxSipprPopup showToast:LTxSipprLocalizedStringWithKey(@"text_camera_album_photo_save_failed") onView:weakSelf.view];
             }
+            if (self.shootDoneCallback) {
+                self.shootDoneCallback(self.takedImage, self.videoUrl,asset);
+            }
         }];
     }
     if (self.videoUrl) {
@@ -134,6 +133,9 @@
                 [weakSelf onDismiss];
             }else{
                 [LTxSipprPopup showToast:LTxSipprLocalizedStringWithKey(@"text_camera_album_video_save_failed") onView:weakSelf.view];
+            }
+            if (self.shootDoneCallback) {
+                self.shootDoneCallback(self.takedImage, self.videoUrl,asset);
             }
         }];
     }
@@ -362,8 +364,9 @@
 -(void)setupComponents{
     self.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.toolView];
-    _toolView.allowTakePhoto = YES;
-    _toolView.allowRecordVideo = YES;
+    _toolView.allowTakePhoto = self.allowTakePhoto;
+    _toolView.allowRecordVideo = self.allowRecordVideo;
+    _toolView.maxRecordDuration = self.maxRecordDuration;
     [self.view addSubview:self.toggleCameraBtn];
     
     [self addConstraintsOnComponents];
