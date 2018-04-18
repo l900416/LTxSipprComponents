@@ -38,7 +38,7 @@
 -(void)setupLeftBackButton{
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 26, 26)];
     [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setImage:LTxSipprBundlePngImageWithName(@"ic_navi_back") forState:UIControlStateNormal];
+    [backBtn setImage:LTxImageWithName(@"ic_navi_back") forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 }
 -(void)backAction{
@@ -143,9 +143,9 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.textColor = [UIColor lightGrayColor];
     // 设置文字
-    [header setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_down_idle") forState:MJRefreshStateIdle];
-    [header setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_down_pulling") forState:MJRefreshStatePulling];
-    [header setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_down_refreshing") forState:MJRefreshStateRefreshing];
+    [header setTitle:LTxLocalizedString(@"text_cmn_refresh_pull_down_idle") forState:MJRefreshStateIdle];
+    [header setTitle:LTxLocalizedString(@"text_cmn_refresh_pull_down_pulling") forState:MJRefreshStatePulling];
+    [header setTitle:LTxLocalizedString(@"text_cmn_refresh_pull_down_refreshing") forState:MJRefreshStateRefreshing];
     return header;
 }
 -(LTxSipprRefreshFooter*)footerWithRefreshingBlock:(LTxSipprCallbackBlock)pullUpRefresh{
@@ -158,9 +158,9 @@
     footer.automaticallyChangeAlpha = YES;
     footer.stateLabel.textColor = [UIColor lightGrayColor];
     // 设置文字
-    [footer setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_up_idle") forState:MJRefreshStateIdle];
-    [footer setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_up_pulling") forState:MJRefreshStatePulling];
-    [footer setTitle:LTxSipprLocalizedStringWithKey(@"text_cmn_refresh_pull_up_refreshing") forState:MJRefreshStateRefreshing];
+    [footer setTitle:LTxLocalizedString(@"text_cmn_refresh_pull_up_idle") forState:MJRefreshStateIdle];
+    [footer setTitle:LTxLocalizedString(@"text_cmn_refresh_pull_up_pulling") forState:MJRefreshStatePulling];
+    [footer setTitle:LTxLocalizedString(@"text_cmn_refresh_pull_up_refreshing") forState:MJRefreshStateRefreshing];
     return footer;
 }
 

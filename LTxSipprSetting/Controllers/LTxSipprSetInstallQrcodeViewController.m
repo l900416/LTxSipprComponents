@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = LTxSipprLocalizedStringWithKey(@"text_setting_qrcode_install");
+    self.title = LTxLocalizedString(@"text_setting_qrcode_install");
     
     [self setupComponents];
     [self addConstraintsOnComponents];

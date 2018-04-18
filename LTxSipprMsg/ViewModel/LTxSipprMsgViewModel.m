@@ -223,6 +223,32 @@
     }];
 }
 
+/**
+ * 消息 - 将某一条消息的阅读状态置为已读
+ **/
++(void)updateMsgReadStateWithMsgGuid:(NSString*)guid complete:(LTxSipprStringCallbackBlock)complete{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    //消息
+    if (guid) {
+        [params setObject:guid forKey:@"guid"];
+    }
+    //配置信息
+    LTxSipprConfig* config = [LTxSipprConfig sharedInstance];
+    if (config.userId) {
+        [params setObject:config.userId forKey:@"userRowGuid"];
+    }
+    if (config.appId) {
+        [params setObject:config.appId forKey:@"appId"];
+    }
+    
+    NSString* url = [NSString stringWithFormat:@"%@/v1/api/mobile/msg/update",config.messageHost];
+    //网络访问
+    [LTxSipprHttpService doPostWithURL:url param:params complete:^(id data, NSString *errorTips) {
+        if (complete) {
+            complete(errorTips);
+        }
+    }];
+}
 
 /**
  * 消息 - 根据业务编码获取消息详情

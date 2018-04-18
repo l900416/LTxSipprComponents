@@ -23,7 +23,7 @@ static NSString* LTxSipprMsgPushDiyTableViewCellIdentifier = @"LTxSipprMsgPushDi
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = LTxSipprLocalizedStringWithKey(@"text_message_push_diy");
+    self.title = LTxLocalizedString(@"text_message_push_diy");
     
     [self setupDefaultConfig];
     [self showAnimatingActivityView];
@@ -50,7 +50,7 @@ static NSString* LTxSipprMsgPushDiyTableViewCellIdentifier = @"LTxSipprMsgPushDi
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         strongSelf.dataSource = [pushTypeList mutableCopy];
         if (!errorTips && [pushTypeList count] == 0) {
-            strongSelf.errorTips = LTxSipprLocalizedStringWithKey(@"text_message_push_no_item");
+            strongSelf.errorTips = LTxLocalizedString(@"text_message_push_no_item");
         }else{
             strongSelf.errorTips = errorTips;
         }

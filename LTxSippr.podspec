@@ -19,16 +19,9 @@ Pod::Spec.new do |s|
 
   s.default_subspecs = 'Core'
 
-  # 资源模块
-  s.subspec 'Support' do |sp|
-    sp.resources = 'Resources/LTxSipprComponents.bundle'
-  end
-
 
   # 核心模块
   s.subspec 'Core' do |sp|
-    # 依赖
-    sp.dependency 'LTxSippr/Support'
     # Model
     sp.subspec 'Model' do |ssp|
         ssp.source_files  =  "LTxSipprFoundation/Model/*.{h,m}"

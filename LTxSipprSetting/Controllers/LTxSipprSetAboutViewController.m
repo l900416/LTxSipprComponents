@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = LTxSipprLocalizedStringWithKey(@"text_setting_about");
+    self.title = LTxLocalizedString(@"text_setting_about");
     
     [self setupComponents];
     [self addConstraintsOnComponents];
@@ -45,9 +45,9 @@
     _versionL.translatesAutoresizingMaskIntoConstraints = NO;
     NSString* versionText;
     if ([LTxSipprConfig sharedInstance].isDebug) {
-        versionText = [NSString stringWithFormat:@"%@：v%@ T",LTxSipprLocalizedStringWithKey(@"text_setting_about_current_version"),[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
+        versionText = [NSString stringWithFormat:@"%@：v%@ T",LTxLocalizedString(@"text_setting_about_current_version"),[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
     }else{
-        versionText = [NSString stringWithFormat:@"%@：v%@",LTxSipprLocalizedStringWithKey(@"text_setting_about_current_version"),[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
+        versionText = [NSString stringWithFormat:@"%@：v%@",LTxLocalizedString(@"text_setting_about_current_version"),[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
     }
     _versionL.text = versionText;
     _versionL.textColor = [UIColor grayColor];
@@ -58,7 +58,7 @@
     _historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _historyBtn.translatesAutoresizingMaskIntoConstraints = NO;
     [_historyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_historyBtn setTitle:[NSString stringWithFormat:@"   %@   ",LTxSipprLocalizedStringWithKey(@"text_setting_about_history")] forState:UIControlStateNormal];
+    [_historyBtn setTitle:[NSString stringWithFormat:@"   %@   ",LTxLocalizedString(@"text_setting_about_history")] forState:UIControlStateNormal];
     [_historyBtn setBackgroundColor:[LTxSipprConfig sharedInstance].skinColor];
     _historyBtn.layer.cornerRadius = 5.f;
     _historyBtn.clipsToBounds = YES;

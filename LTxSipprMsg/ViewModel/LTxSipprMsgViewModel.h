@@ -49,6 +49,10 @@
  **/
 +(void)updateMsgReadStateWithMsgId:(NSString*)messageId complete:(LTxSipprStringCallbackBlock)complete;
 
+/**
+ * 消息 - 将某一条消息的阅读状态置为已读
+ **/
++(void)updateMsgReadStateWithMsgGuid:(NSString*)guid complete:(LTxSipprStringCallbackBlock)complete;
 
 /**
  * 消息 - 根据业务编码获取消息详情

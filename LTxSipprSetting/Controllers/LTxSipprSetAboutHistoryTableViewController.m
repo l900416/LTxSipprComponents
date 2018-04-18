@@ -31,7 +31,7 @@ static NSString* LTxSipprSetAboutHistoryTableViewCellIdentifier = @"LTxSipprSetA
 
 -(void)setupDefaultConfig{
     
-    self.title = LTxSipprLocalizedStringWithKey(@"text_setting_about_history");
+    self.title = LTxLocalizedString(@"text_setting_about_history");
     
     self.tableView.estimatedRowHeight = 60.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;

@@ -21,6 +21,7 @@ typedef void (^LTxSipprProgressCallbackBlock)(NSProgress*);
 typedef void (^LTxSipprObjectCallbackBlock)(id);
 
 typedef void (^LTxSipprBoolAndStringCallbackBlock)(BOOL,NSString*);
+typedef void (^LTxSipprBoolAndObjectCallbackBlock)(BOOL,id);
 typedef void (^LTxSipprArrayAndStringCallbackBlock)(NSArray*,NSString*);
 typedef void (^LTxSipprDictionaryAndStringCallbackBlock)(NSDictionary*,NSString*);
 typedef void (^LTxSipprObjectAndStringCallbackBlock)(id,NSString*);
@@ -32,14 +33,9 @@ typedef void (^LTxSipprBoolBoolDictionaryAndStringCallbackBlock)(BOOL,BOOL,NSDic
 
 #define SelfBundle  [NSBundle bundleForClass:[self class]]
 
-//获取Bundle中的image
-#define LTxSipprBundlePngImageWithName(imageName) ([UIImage imageWithContentsOfFile: [SelfBundle pathForResource:[NSString stringWithFormat:@"Frameworks/LTxSippr.framework/LTxSipprComponents.bundle/Images/%@",imageName] ofType:@"png"]]?:[UIImage imageWithContentsOfFile: [SelfBundle pathForResource:[NSString stringWithFormat:@"LTxSipprComponents.bundle/Images/%@",imageName] ofType:@"png"]])
+#define LTxLocalizedString(key)  NSLocalizedStringFromTable(key,@"LT.bundle/Language/LT",nil)
 
-/**
- * 语言配置
- **/
-#define LTxSipprLocalizedStringWithKey(key)  NSLocalizedStringFromTableInBundle(key,@"Frameworks/LTxSippr.framework/LTxSipprComponents.bundle/Language/LTxSippr",[NSBundle mainBundle],nil)
-
+#define LTxImageWithName(imageName)  [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"LT.bundle/Images/%@",imageName] ofType:@"png"]]
 
 
 /**
