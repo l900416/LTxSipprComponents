@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "LTxSippr"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "Components For Sippr. "
   s.license      = "MIT"
   s.author             = { "liangtong" => "l900416@163.com" }
