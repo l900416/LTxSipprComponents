@@ -110,7 +110,7 @@
 
 #pragma mark - 从相册中选照片
 - (void)setupNavigationBar {
-    self.navigationItem.title = @"扫码";
+    self.navigationItem.title = LTxLocalizedString(@"text_camera_qrcode_scan");
     UIButton* albumBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 42, 26)];
     [albumBtn addTarget:self action:@selector(rightBarButtonItenAction) forControlEvents:UIControlEventTouchUpInside];
     [albumBtn setTitle:LTxLocalizedString(@"text_camera_album") forState:UIControlStateNormal];

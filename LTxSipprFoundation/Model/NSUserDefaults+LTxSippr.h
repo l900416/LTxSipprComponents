@@ -31,6 +31,14 @@
 
 ///#begin
 /**
+ *    @brief    删除特定key对应的值。
+ *    @param     key         key值
+ */
+///#end
++ (void)lt_removeObjectForKey:(NSString *)key;
+
+///#begin
+/**
  *    @brief    清空UserDefaults
  */
 ///#end

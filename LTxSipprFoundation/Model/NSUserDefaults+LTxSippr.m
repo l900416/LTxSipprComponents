@@ -9,6 +9,20 @@
 
 @implementation NSUserDefaults (LTxSippr)
 
+
+///#begin
+/**
+ *    @brief    删除特定key对应的值。
+ *    @param     key         key值
+ */
+///#end
++ (void)lt_removeObjectForKey:(NSString *)key{
+    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+    [accountDefaults removeObjectForKey:key];
+    [accountDefaults synchronize];
+}
+
+
 ///#begin
 /**
  *    @brief    清空UserDefaults
