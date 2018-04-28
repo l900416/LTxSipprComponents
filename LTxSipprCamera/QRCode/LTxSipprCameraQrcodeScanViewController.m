@@ -9,7 +9,6 @@
 #import "LTxSipprCameraQrcodeScanViewController.h"
 #import "LTxSipprCameraUtil.h"
 #import "SGQRCode.h"
-#import <AVFoundation/AVFoundation.h>
 @interface LTxSipprCameraQrcodeScanViewController ()<SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
 @property (nonatomic, strong) SGQRCodeScanManager *manager;
 @property (nonatomic, strong) SGQRCodeScanningView *scanningView;
