@@ -124,7 +124,7 @@ static NSString* LTxSipprMsgTypeDetailTableViewCellIdentifier = @"LTxSipprMsgTyp
     //先判断消息是否是通用消息，如果是通用类型，则直接处理，否则发送全局通知供其他处理
     
     NSString* msgTypeCode = [msgDic objectForKey:@"msgTypeCode"];
-    if ([msgTypeCode isEqualToString:@"announcement"] || [msgTypeCode isEqualToString:@"notification"] || [msgTypeCode isEqualToString:@"systemNotification"]) {//公告、通知、系统提醒
+    if ([msgTypeCode isEqualToString:@"systemNotification"]) {//公告、通知、系统提醒
         int extraFileCount = [[msgDic objectForKey:@"extraFileCount"] intValue];//附件数量
         if (extraFileCount == 0) {//没有附件
             return;

@@ -16,7 +16,8 @@
 @interface LTxSipprBaseViewController : UIViewController
 
 #pragma mark - 画面提示
-@property(nonatomic,strong) NSString* errorTips;
+@property (nonatomic, strong) NSString* errorTips;
+@property (nonatomic, strong) UIScrollView* emptyScrollView;
 
 #pragma mark - ActivityView
 -(void)showAnimatingActivityView;

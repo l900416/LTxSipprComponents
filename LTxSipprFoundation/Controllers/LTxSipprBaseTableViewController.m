@@ -191,7 +191,7 @@
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     if (_errorTips == nil) {
-        return nil;//初始画面
+        return [UIImage imageNamed:@"ic_no_data"];//初始画面
     }else{
         return [UIImage imageNamed:@"app_view_error_code"];//发生错误了
     }
@@ -238,11 +238,11 @@
 }
 
 - (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView{
-    return 2.f;
+    return 20.f;
 }
 
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView{
-    return -60.f;
+    return -0.f;
 }
 
 - (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view{

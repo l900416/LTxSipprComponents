@@ -104,7 +104,7 @@ static LTxSipprHTTPSessionManager *_sharedManager;
     dispatch_once(&onceTokenLTxSipprHTTPSessionManager, ^{
         _sharedManager = [LTxSipprHTTPSessionManager manager];
         _sharedManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
-        _sharedManager.requestSerializer.timeoutInterval = 10.f;
+        _sharedManager.requestSerializer.timeoutInterval = 30.f;
     });
     
     return _sharedManager;

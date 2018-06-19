@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UILabel* versionL;
 @property (nonatomic, strong) UIButton* historyBtn;
 
+@property (nonatomic, strong) UILabel* tipL;
+
 @end
 
 @implementation LTxSipprSetAboutViewController
@@ -64,6 +66,15 @@
     _historyBtn.clipsToBounds = YES;
     [_historyBtn addTarget:self action:@selector(showHistory) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_historyBtn];
+    
+    
+    _tipL = [[UILabel alloc] init];
+    _tipL.translatesAutoresizingMaskIntoConstraints = NO;
+    _tipL.text = [LTxSipprConfig sharedInstance].aboutTip;
+    _tipL.numberOfLines = 0;
+    _tipL.font = [UIFont systemFontOfSize:13];
+    _tipL.textColor = [UIColor darkGrayColor];
+    [self.view addSubview:_tipL];
 }
 
 -(void)addConstraintsOnComponents{
@@ -79,8 +90,13 @@
     NSLayoutConstraint* btnXConstraint = [NSLayoutConstraint constraintWithItem:_historyBtn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_appNameL attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0];
     NSLayoutConstraint* btnTopConstraint = [NSLayoutConstraint constraintWithItem:_historyBtn attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_versionL attribute:NSLayoutAttributeBottom multiplier:1.f constant:20];
     
+    //提示 - 版权
+    NSLayoutConstraint* tLeading = [NSLayoutConstraint constraintWithItem:_tipL attribute:NSLayoutAttributeLeadingMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeadingMargin multiplier:1.f constant:10];
+    NSLayoutConstraint* tTrailing = [NSLayoutConstraint constraintWithItem:_tipL attribute:NSLayoutAttributeTrailingMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailingMargin multiplier:1.f constant:-10];
+    NSLayoutConstraint* tBottom = [NSLayoutConstraint constraintWithItem:_tipL attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottomMargin multiplier:1.f constant:-20];
+    
     //激活约束，等价于单独设置约束.active = YES;
-    [NSLayoutConstraint activateConstraints:@[nameXConstraint,nameYConstraint,versionXConstraint,versionTopConstraint,btnXConstraint,btnTopConstraint]];
+    [NSLayoutConstraint activateConstraints:@[nameXConstraint,nameYConstraint,versionXConstraint,versionTopConstraint,btnXConstraint,btnTopConstraint,tLeading,tTrailing,tBottom]];
 }
 
 -(void)showHistory{
