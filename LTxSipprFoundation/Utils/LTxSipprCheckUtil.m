@@ -96,7 +96,7 @@
         }else if (code == 20208){
             retString = @"云平台短信服务业务限流！";
         }else if (code == 20209){
-            retString = @"云平台短信服务调用异常！";
+            retString = @"云平台短信暂停服务！";
         }else{
             retString = @"服务异常，请稍后再试！";
         }
